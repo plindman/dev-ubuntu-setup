@@ -43,15 +43,13 @@ These are core operating system utilities and essential command-line tools that 
 
 These are essential command-line tools and utilities specifically tailored for software development. They are independent of a graphical environment.
 
-### Build Tools
+### Tools
 *   **build-essential**: Provides low-level compilers (like C/C++) that act as a foundational "safety net," as they are often a hidden dependency for installing other development tools and libraries from source.
+*   **ripgrep**: A line-oriented search tool that recursively searches your current directory for a regex pattern. It's a faster alternative to `grep` for code.
 
 ### Git
 *   **git-all**: The version control system for managing code.
 *   **gh**: The official GitHub CLI for interacting with repositories.
-
-### Code Search
-*   **ripgrep**: A line-oriented search tool that recursively searches your current directory for a regex pattern. It's a faster alternative to `grep` for code.
 
 ### Runtimes & Package Managers
 #### JavaScript & TypeScript
@@ -78,6 +76,7 @@ These packages and configurations are specific to a graphical desktop environmen
 *   **gnome-tweaks**: Provides a tool for advanced customization of the GNOME desktop.
 *   **gnome-shell-extension-manager**: Manages GNOME Shell extensions.
 *   **gnome-keyring**: A background service that stores passwords and secrets for the desktop environment.
+*   **libsecret-tools**: 
 
 ### Desktop Utilities
 *   **nemo**: Installs the Nemo file manager.
