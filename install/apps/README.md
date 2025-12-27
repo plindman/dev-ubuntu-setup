@@ -24,6 +24,10 @@ This directory uses an `install.sh` orchestrator that runs all application insta
 *   `ghostty.sh` - Installs Ghostty Terminal
 *   `antigravity.sh` - Installs Google Antigravity (AI-first IDE)
 
+### Verification
+
+*   `verify.sh` - Verification functions for all applications. Source this file to use verification functions in install scripts. Can also be run standalone to check installation status.
+
 ## Reference Files
 
 Original reference documentation and commands are stored in `docs/sources/`:

@@ -12,16 +12,28 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 # Source the helper functions
 source "$REPO_ROOT/lib/helpers.sh"
+source "$REPO_ROOT/install/apps/verify.sh"
 
 print_header "Starting installation of Visual Studio Code"
 
-# Install VS Code via official repository method
-# Verbatim commands from official VS Code documentation
-sudo apt install software-properties-common -y
-sudo apt-add-repository "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/code stable main"
+# Check if already installed
+if verify_vscode; then
+    print_color "$GREEN" "Visual Studio Code is already installed. Skipping."
+else
+    # Install VS Code via official repository method
+    # Verbatim commands from official VS Code documentation
+    sudo apt install software-properties-common -y
+    sudo apt-add-repository "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/code stable main"
 
-# Update after adding new repository
-sudo apt update
-sudo apt install code -y
+    # Update after adding new repository
+    sudo apt update
+    sudo apt install code -y
 
-print_color "$GREEN" "Visual Studio Code installation complete."
+    # Verify installation
+    if verify_vscode; then
+        print_color "$GREEN" "Visual Studio Code installation complete."
+    else
+        print_color "$RED" "Visual Studio Code installation failed."
+        exit 1
+    fi
+fi
