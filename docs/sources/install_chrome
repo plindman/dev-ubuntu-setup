@@ -1,0 +1,14 @@
+
+# https://itsfoss.gitlab.io/post/how-to-install-google-chrome-on-ubuntu-2404-2204-or-2004/
+# deps sudo apt update
+# deps (installed in system) wget gnupg
+
+# Download and Add Google’s Signing Key
+# Add the Google Chrome Repository
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
+
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+
+sudo apt update
+
+sudo apt install google-chrome-stable -y
