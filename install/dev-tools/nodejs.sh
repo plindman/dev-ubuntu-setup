@@ -14,6 +14,7 @@ source "$REPO_ROOT/lib/helpers.sh"
 print_header "Starting installation of Node.js"
 
 # Install Node.js via NodeSource PPA
+# Verbatim command from official NodeSource documentation
 sudo apt update
 sudo apt install -y ca-certificates curl gnupg
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -

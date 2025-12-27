@@ -4,14 +4,11 @@
 
 set -e # Exit immediately if a command exits with a non-zero status
 
-# --- Helper Functions ---
+# Set repository root and source helper functions
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$REPO_ROOT/lib/helpers.sh"
 
-# Function to display a section header
-print_header() {
-    echo -e "\n=========================================="
-    echo -e "  $1"
-    echo -e "==========================================\n"
-}
+# --- Helper Functions ---
 
 # Function to run scripts in a given directory
 run_category_scripts() {
@@ -38,11 +35,6 @@ install_system() {
     run_category_scripts "$(dirname "$0")/install/system"
 }
 
-install_services() {
-    print_header "Installing Services"
-    run_category_scripts "$(dirname "$0")/install/services"
-}
-
 install_desktop() {
     print_header "Installing Desktop Components"
     run_category_scripts "$(dirname "$0")/install/desktop"
@@ -51,16 +43,6 @@ install_desktop() {
 install_dev_tools() {
     print_header "Installing CLI Development Tools"
     run_category_scripts "$(dirname "$0")/install/dev-tools"
-}
-
-install_dev_apps() {
-    print_header "Installing GUI Development Applications"
-    run_category_scripts "$(dirname "$0")/install/dev-apps"
-}
-
-install_apps() {
-    print_header "Installing General Applications"
-    run_category_scripts "$(dirname "$0")/install/apps"
 }
 
 # --- Main Menu ---
@@ -72,11 +54,8 @@ show_menu() {
     echo "--------------------------------------------------"
     echo "Please select which categories to install:"
     echo "  1) System Utilities"
-    echo "  2) Services"
-    echo "  3) Desktop Components"
-    echo "  4) CLI Development Tools"
-    echo "  5) GUI Development Applications"
-    echo "  6) General Applications"
+    echo "  2) Desktop Components"
+    echo "  3) CLI Development Tools"
     echo "  A) Install ALL Categories"
     echo "  Q) Quit"
     echo "--------------------------------------------------"
@@ -85,18 +64,12 @@ show_menu() {
 
     case "$choice" in
         1) install_system ;;
-        2) install_services ;;
-        3) install_desktop ;;
-        4) install_dev_tools ;;
-        5) install_dev_apps ;;
-        6) install_apps ;;
+        2) install_desktop ;;
+        3) install_dev_tools ;;
         [aA])
             install_system
-            install_services
             install_desktop
             install_dev_tools
-            install_dev_apps
-            install_apps
             ;;
         [qQ]) exit 0 ;;
         *) echo "Invalid choice, please try again." ;;
@@ -113,11 +86,8 @@ if [[ "$1" == "--all" ]]; then
     # Non-interactive "install all" option
     print_header "Starting Full Automated Installation"
     install_system
-    install_services
     install_desktop
     install_dev_tools
-    install_dev_apps
-    install_apps
     print_header "Full Installation Complete!"
 elif [[ "$1" == "--help" || "$1" == "-h" ]]; then
     echo "Usage: ./install.sh [--all | -h | --help]"
