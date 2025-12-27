@@ -2,6 +2,10 @@
 #
 # Utility functions for common checks.
 
+# Add ~/.local/bin to PATH for command_exists checks during installation
+# This is temporary - only for the duration of the install script
+export PATH="$HOME/.local/bin:$PATH"
+
 # --- Utility Functions ---
 
 # Check if a command exists
