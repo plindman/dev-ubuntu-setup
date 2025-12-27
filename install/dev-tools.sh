@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# This script orchestrates the installation of all components in the 'dev-tools' category.
+# The order of execution is important to handle dependencies.
+
+set -e
+
+# Set repository root
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Source the helper functions
+source "$REPO_ROOT/lib/helpers.sh"
+
+SCRIPT_DIR="$REPO_ROOT/installers"
+
+print_header "Running Development Tools (CLI) Installation Scripts"
+
+# Update package lists once for all dev-tools scripts
+print_color "$GREEN" "Updating package lists..."
+sudo apt-get -qq update
+
+# The order of execution is important here.
+run_script "$SCRIPT_DIR/devtools-tools.sh"
+run_script "$SCRIPT_DIR/devtools-git.sh"
+run_script "$SCRIPT_DIR/devtools-nodejs.sh"
+run_script "$SCRIPT_DIR/devtools-bun.sh"
+run_script "$SCRIPT_DIR/devtools-uv.sh"
+run_script "$SCRIPT_DIR/devtools-gemini-cli.sh"
+run_script "$SCRIPT_DIR/devtools-claude-code.sh"
+run_script "$SCRIPT_DIR/devtools-services.sh"
+
+print_color "$GREEN" "--- Development Tools (CLI) Installation Complete ---"
