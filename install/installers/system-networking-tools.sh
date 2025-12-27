@@ -3,16 +3,12 @@
 # Script to install Networking Tools.
 # This corresponds to the "System" -> "Networking Tools" category in SOFTWARE_INDEX.md.
 
-set -e
+APP_NAME="Networking Tools"
+APP_COMMAND=("curl" "wget")
 
-# Set repository root
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+install_networking_tools() {
+    install_and_show_versions curl wget
+}
 
-# Source the helper functions
-source "$REPO_ROOT/install/lib/helpers.sh"
-
-print_header "Starting installation of Networking Tools"
-
-install_and_show_versions curl wget
-
-print_color "$GREEN" "Networking Tools installation complete."
+# Source shared installation helper
+source "$(dirname "$0")/../lib/install_app.sh"

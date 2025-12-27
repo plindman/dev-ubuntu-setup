@@ -3,17 +3,12 @@
 # Script to install system services.
 # This corresponds to the "System" -> "System Services" category in SOFTWARE_INDEX.md.
 
-set -e
+APP_NAME="System Services"
+APP_COMMAND="ssh"
 
-# Set repository root
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+install_services() {
+    install_and_show_versions openssh-server
+}
 
-# Source the helper functions
-source "$REPO_ROOT/install/lib/helpers.sh"
-
-print_header "Starting installation of System Services"
-
-# 1. Install openssh-server
-install_and_show_versions openssh-server
-
-print_color "$GREEN" "System Services installation complete."
+# Source shared installation helper
+source "$(dirname "$0")/../lib/install_app.sh"

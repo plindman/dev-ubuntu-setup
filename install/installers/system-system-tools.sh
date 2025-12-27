@@ -3,16 +3,12 @@
 # Script to install System Tools.
 # This corresponds to the "System" -> "System Tools" category in SOFTWARE_INDEX.md.
 
-set -e
+APP_NAME="System Tools"
+APP_COMMAND=("htop" "keychain")
 
-# Set repository root
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+install_system_tools() {
+    install_and_show_versions htop keychain
+}
 
-# Source the helper functions
-source "$REPO_ROOT/install/lib/helpers.sh"
-
-print_header "Starting installation of System Tools"
-
-install_and_show_versions htop keychain
-
-print_color "$GREEN" "System Tools installation complete."
+# Source shared installation helper
+source "$(dirname "$0")/../lib/install_app.sh"

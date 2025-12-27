@@ -25,6 +25,7 @@ install_dev_tools() {
     # The order of execution is important here.
     run_script "$SCRIPT_DIR/devtools-tools.sh"
     run_script "$SCRIPT_DIR/devtools-git.sh"
+    run_script "$SCRIPT_DIR/devtools-gh.sh"
     run_script "$SCRIPT_DIR/devtools-nodejs.sh"
     run_script "$SCRIPT_DIR/devtools-bun.sh"
     run_script "$SCRIPT_DIR/devtools-uv.sh"

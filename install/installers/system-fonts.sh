@@ -3,41 +3,28 @@
 # Script to install the FiraCode Nerd Font.
 # This corresponds to the "System" -> "Fonts" category.
 
-set -e
+APP_NAME="FiraCode Nerd Font"
+# No APP_COMMAND - font installer
 
-# Set repository root
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+install_fonts() {
+    FONT_NAME="FiraCode"
+    FONT_DIR="$HOME/.local/share/fonts/$FONT_NAME"
+    FONT_ARCHIVE_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip"
+    TEMP_DIR=$(mktemp -d)
 
-# Source the helper functions
-source "$REPO_ROOT/install/lib/helpers.sh"
-
-print_header "Starting installation of FiraCode Nerd Font"
-
-FONT_NAME="FiraCode"
-FONT_DIR="$HOME/.local/share/fonts/$FONT_NAME"
-FONT_ARCHIVE_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip"
-TEMP_DIR=$(mktemp -d)
-
-# 1. Check if font is already installed (basic check)
-if [ -d "$FONT_DIR" ] && [ "$(ls -A "$FONT_DIR")" ]; then
-    print_color "$GREEN" "FiraCode Nerd Font appears to be already installed at $FONT_DIR. Skipping installation."
-else
-    print_color "$GREEN" "FiraCode Nerd Font not found or not fully installed. Proceeding with installation."
-    # 2. Create the font directory if it doesn't exist
-    print_color "$GREEN" "Creating font directory at $FONT_DIR..."
+    # Create the font directory if it doesn't exist
     mkdir -p "$FONT_DIR"
 
-    # 3. Download and unzip the font
-    print_color "$GREEN" "Downloading and unzipping FiraCode Nerd Font..."
+    # Download and unzip the font
     wget -q "$FONT_ARCHIVE_URL" -O "$TEMP_DIR/$FONT_NAME.zip"
     unzip -q "$TEMP_DIR/$FONT_NAME.zip" -d "$FONT_DIR"
 
-    # 4. Clean up temporary files
+    # Clean up temporary files
     rm -rf "$TEMP_DIR"
 
-    # 5. Refresh the font cache
-    print_color "$GREEN" "Refreshing font cache..."
+    # Refresh the font cache
     fc-cache -f -v
-fi
+}
 
-print_color "$GREEN" "FiraCode Nerd Font installation complete."
+# Source shared installation helper
+source "$(dirname "$0")/../lib/install_app.sh"

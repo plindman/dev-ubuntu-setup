@@ -3,17 +3,12 @@
 # Script to install build tools.
 # This corresponds to the "Development Tools (CLI)" -> "Build Tools" category in SOFTWARE_INDEX.md.
 
-set -e
+APP_NAME="Build Tools"
+APP_COMMAND="rg"
 
-# Set repository root
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+install_tools() {
+    install_and_show_versions build-essential ripgrep
+}
 
-# Source the helper functions
-source "$REPO_ROOT/install/lib/helpers.sh"
-
-print_header "Starting installation of Tools"
-
-# Install build-essential and ripgrep
-install_and_show_versions build-essential ripgrep
-
-print_color "$GREEN" "Tools installation complete."
+# Source shared installation helper
+source "$(dirname "$0")/../lib/install_app.sh"
