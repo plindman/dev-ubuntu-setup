@@ -5,9 +5,9 @@
 # https://itsfoss.gitlab.io/post/how-to-install-google-chrome-on-ubuntu-2404-2204-or-2004/
 
 APP_NAME="Google Chrome"
-APP_VERIFY_FUNC="verify_chrome"
+APP_COMMAND="google-chrome"
 
-install_chrome() {
+install_google_chrome() {
     # Install Chrome via official repository method
     # Verbatim commands from official Google Chrome installation guide
     wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
@@ -19,4 +19,4 @@ install_chrome() {
 }
 
 # Source shared installation helper
-source "$(dirname "$0")/../install_app.sh"
+source "$(dirname "$0")/../lib/install_app.sh"

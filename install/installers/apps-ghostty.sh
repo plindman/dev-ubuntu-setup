@@ -4,7 +4,7 @@
 # This corresponds to the "Applications (GUI)" -> "Development" category in SOFTWARE_INDEX.md.
 
 APP_NAME="Ghostty"
-APP_VERIFY_FUNC="verify_ghostty"
+APP_COMMAND="ghostty"
 
 install_ghostty() {
     # Install Ghostty via official installer script
@@ -14,4 +14,4 @@ install_ghostty() {
 }
 
 # Source shared installation helper
-source "$(dirname "$0")/../install_app.sh"
+source "$(dirname "$0")/../lib/install_app.sh"

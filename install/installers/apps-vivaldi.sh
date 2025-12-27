@@ -4,9 +4,9 @@
 # This corresponds to the "Applications (GUI)" -> "Web Browsers" category in SOFTWARE_INDEX.md.
 
 APP_NAME="Vivaldi"
-APP_VERIFY_FUNC="verify_vivaldi"
+APP_COMMAND="vivaldi-stable"
 
-install_vivaldi() {
+install_vivaldi_stable() {
     # Install dependencies
     # Verbatim commands from official Vivaldi documentation
     install_and_show_versions software-properties-common apt-transport-https curl
@@ -20,4 +20,4 @@ install_vivaldi() {
 }
 
 # Source shared installation helper
-source "$(dirname "$0")/../install_app.sh"
+source "$(dirname "$0")/../lib/install_app.sh"

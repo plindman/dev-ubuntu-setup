@@ -1,51 +1,41 @@
 #!/bin/bash
 
 # Main installation script for the Development Workstation Setup
+# Usage: ./install.sh [options]
+#   --all           Install all categories
+#   --system        Install system utilities
+#   --desktop       Install desktop components
+#   --dev-tools     Install CLI development tools
+#   --apps          Install GUI applications
+#   -h, --help      Show this help message
+# If no arguments provided, show interactive menu
 
-set -e # Exit immediately if a command exits with a non-zero status
+set -e
 
-# Set repository root and source helper functions
+# Set repository root
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$REPO_ROOT/lib/helpers.sh"
 
-# --- Helper Functions ---
+# Source helper functions
+source "$REPO_ROOT/install/lib/helpers.sh"
 
-# Function to run scripts in a given directory
-run_category_scripts() {
-    local category_dir="$1"
-    if [ -d "$category_dir" ]; then
-        echo "Installing components from $category_dir..."
-        for script in "$category_dir"/*.sh; do
-            if [ -f "$script" ]; then
-                print_header "Running $(basename "$script")"
-                # For now, just echo the script name. Later, we'll execute it.
-                # bash "$script"
-                echo "Executing script: $script (placeholder)"
-            fi
-        done
-    else
-        echo "Warning: Category directory '$category_dir' not found. Skipping."
-    fi
+# Source category orchestrators
+source "$REPO_ROOT/install/cat-system.sh"
+source "$REPO_ROOT/install/cat-desktop.sh"
+source "$REPO_ROOT/install/cat-dev-tools.sh"
+source "$REPO_ROOT/install/cat-apps.sh"
+
+# --- Installation Functions ---
+
+install_all() {
+    print_header "Starting Full Installation"
+    install_system
+    install_desktop
+    install_dev_tools
+    install_apps
+    print_header "Full Installation Complete!"
 }
 
-# --- Installation Categories ---
-
-install_system() {
-    print_header "Installing System Utilities"
-    run_category_scripts "$(dirname "$0")/install/system"
-}
-
-install_desktop() {
-    print_header "Installing Desktop Components"
-    run_category_scripts "$(dirname "$0")/install/desktop"
-}
-
-install_dev_tools() {
-    print_header "Installing CLI Development Tools"
-    run_category_scripts "$(dirname "$0")/install/dev-tools"
-}
-
-# --- Main Menu ---
+# --- Interactive Menu ---
 
 show_menu() {
     clear
@@ -56,6 +46,7 @@ show_menu() {
     echo "  1) System Utilities"
     echo "  2) Desktop Components"
     echo "  3) CLI Development Tools"
+    echo "  4) GUI Applications"
     echo "  A) Install ALL Categories"
     echo "  Q) Quit"
     echo "--------------------------------------------------"
@@ -66,35 +57,75 @@ show_menu() {
         1) install_system ;;
         2) install_desktop ;;
         3) install_dev_tools ;;
-        [aA])
-            install_system
-            install_desktop
-            install_dev_tools
-            ;;
+        4) install_apps ;;
+        [aA]) install_all ;;
         [qQ]) exit 0 ;;
         *) echo "Invalid choice, please try again." ;;
     esac
 
     echo -e "\nPress any key to return to the menu..."
     read -n 1
-    show_menu # Loop back to menu
+    show_menu
 }
 
-# --- Execution ---
+# --- CLI Argument Parsing ---
 
-if [[ "$1" == "--all" ]]; then
-    # Non-interactive "install all" option
-    print_header "Starting Full Automated Installation"
-    install_system
-    install_desktop
-    install_dev_tools
-    print_header "Full Installation Complete!"
-elif [[ "$1" == "--help" || "$1" == "-h" ]]; then
-    echo "Usage: ./install.sh [--all | -h | --help]"
-    echo "  --all    : Perform a full, non-interactive installation of all categories."
-    echo "  -h, --help : Show this help message."
+show_help() {
+    echo "Usage: $0 [options]"
+    echo ""
+    echo "Options:"
+    echo "  --all           Install all categories"
+    echo "  --system        Install system utilities"
+    echo "  --desktop       Install desktop components"
+    echo "  --dev-tools     Install CLI development tools"
+    echo "  --apps          Install GUI applications"
+    echo "  -h, --help      Show this help message"
+    echo ""
     echo "If no arguments are provided, an interactive menu will be displayed."
-else
-    # Interactive menu by default
+    echo ""
+    echo "Examples:"
+    echo "  $0 --all                    # Install everything"
+    echo "  $0 --system --dev-tools     # Install system and dev-tools only"
+    echo "  $0                          # Interactive menu"
+}
+
+# Parse command line arguments
+if [[ $# -eq 0 ]]; then
+    # No arguments - show interactive menu
     show_menu
+else
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --all)
+                install_all
+                exit 0
+                ;;
+            --system)
+                install_system
+                shift
+                ;;
+            --desktop)
+                install_desktop
+                shift
+                ;;
+            --dev-tools)
+                install_dev_tools
+                shift
+                ;;
+            --apps)
+                install_apps
+                shift
+                ;;
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+            *)
+                echo "Error: Unknown option '$1'"
+                show_help
+                exit 1
+                ;;
+        esac
+    done
 fi

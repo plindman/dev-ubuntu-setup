@@ -4,7 +4,7 @@
 # This corresponds to the "Applications (GUI)" -> "Development" category in SOFTWARE_INDEX.md.
 
 APP_NAME="Antigravity"
-APP_VERIFY_FUNC="verify_antigravity"
+APP_COMMAND="antigravity"
 
 install_antigravity() {
     # Install Antigravity via official repository method
@@ -21,4 +21,4 @@ install_antigravity() {
 }
 
 # Source shared installation helper
-source "$(dirname "$0")/../install_app.sh"
+source "$(dirname "$0")/../lib/install_app.sh"

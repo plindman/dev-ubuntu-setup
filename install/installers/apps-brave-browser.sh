@@ -4,9 +4,9 @@
 # This corresponds to the "Applications (GUI)" -> "Web Browsers" category in SOFTWARE_INDEX.md.
 
 APP_NAME="Brave Browser"
-APP_VERIFY_FUNC="verify_brave"
+APP_COMMAND="brave-browser"
 
-install_brave() {
+install_brave_browser() {
     # Install Brave via official repository method
     # Verbatim commands from official Brave Browser documentation
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -18,4 +18,4 @@ install_brave() {
 }
 
 # Source shared installation helper
-source "$(dirname "$0")/../install_app.sh"
+source "$(dirname "$0")/../lib/install_app.sh"

@@ -10,7 +10,7 @@ set -e
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # Source the helper functions
-source "$REPO_ROOT/lib/helpers.sh"
+source "$REPO_ROOT/install/lib/helpers.sh"
 
 print_header "Starting installation of zsh and Oh My Zsh"
 
