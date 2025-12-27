@@ -64,7 +64,7 @@ These are essential command-line tools and utilities specifically tailored for s
 
 ### Services
 *   **Docker Engine & CLI**: A containerization platform to build and run applications.
-*   **VS Code Server**: A backend service to enable remote development from another machine.
+*   **VS Code Server**: A backend service to enable remote development from another machine. Installed from client over SSH so nothing we install here on dev machine.
 
 ---
 
