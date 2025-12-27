@@ -96,6 +96,110 @@ This ensures scripts work correctly regardless of where they are executed from.
 
 ---
 
+## Verification Pattern
+
+All installation scripts must verify that the software was successfully installed after attempting installation. For categories with multiple installations (e.g., apps), use a centralized `verify.sh` file.
+
+### Centralized verify.sh Pattern (Preferred for Multiple Installations)
+
+For directories with multiple installable components, create a `verify.sh` with verification functions:
+
+**`verify.sh` structure:**
+```bash
+#!/bin/bash
+
+# Verification functions for [category] applications.
+# Source this file to use verification functions in install scripts.
+
+# Internal helper
+_command_exists() {
+    command -v "$1" &> /dev/null
+}
+
+# Verification functions for each component
+verify_component_name() {
+    _command_exists component-command
+}
+
+verify_another_component() {
+    _command_exists another-command
+}
+
+# Optional: Show all installation status
+show_all_status() {
+    echo "[Category] Installation Status:"
+    echo "================================"
+    echo "Component Name:   $(verify_component_name && echo 'Installed' || echo 'Not installed')"
+    echo "Another Component: $(verify_another_component && echo 'Installed' || echo 'Not installed')"
+}
+```
+
+**Install script pattern:**
+```bash
+#!/bin/bash
+
+set -e
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+source "$REPO_ROOT/lib/helpers.sh"
+source "$REPO_ROOT/install/category/verify.sh"  # Source verify functions
+
+print_header "Starting installation of Component Name"
+
+# Check if already installed
+if verify_component_name; then
+    print_color "$GREEN" "Component Name is already installed. Skipping."
+else
+    # Installation commands here...
+
+    # Verify installation
+    if verify_component_name; then
+        print_color "$GREEN" "Component Name installation complete."
+    else
+        print_color "$RED" "Component Name installation failed."
+        exit 1
+    fi
+fi
+```
+
+### Benefits
+
+1. **Reusable**: Verification functions used before install (skip if already installed) and after install (verify success)
+2. **Single source of truth**: How each component is verified defined in one place
+3. **Auditable**: Can run `show_all_status()` to see what's installed
+4. **DRY principle**: No duplication of verification logic
+
+### Simple Verification Pattern (Single Installations)
+
+For standalone scripts installing a single component without a category:
+```bash
+#!/bin/bash
+
+set -e
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+source "$REPO_ROOT/lib/helpers.sh"
+
+print_header "Starting installation of Component"
+
+# Check if already installed
+if command -v component-command &> /dev/null; then
+    print_color "$GREEN" "Component is already installed. Skipping."
+else
+    # Installation commands here...
+
+    # Verify installation
+    if command -v component-command &> /dev/null; then
+        print_color "$GREEN" "Component installation complete."
+    else
+        print_color "$RED" "Component installation failed."
+        exit 1
+    fi
+fi
+```
+
+---
+
 ## Helper Functions (`lib/helpers.sh`)
 
 ### Available Functions
