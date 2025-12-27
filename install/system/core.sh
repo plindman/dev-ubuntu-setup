@@ -5,8 +5,11 @@
 
 set -e
 
+# Set repository root
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+
 # Source the helper functions
-source "$(dirname "$0")/../../lib/helpers.sh"
+source "$REPO_ROOT/lib/helpers.sh"
 
 print_header "Starting installation of Core System Utilities"
 

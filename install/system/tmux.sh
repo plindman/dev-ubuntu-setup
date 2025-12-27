@@ -7,8 +7,11 @@ set -e
 set -o nounset   # abort on unbound variable
 set -o pipefail  # don't hide errors within pipes
 
+# Set repository root
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+
 # Source the helper functions
-source "$(dirname "$0")/../../lib/helpers.sh"
+source "$REPO_ROOT/lib/helpers.sh"
 
 print_header "Starting installation of tmux and Oh My Tmux"
 

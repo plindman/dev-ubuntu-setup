@@ -5,21 +5,13 @@
 
 set -e
 
-SCRIPT_DIR=$(dirname "$0")
-# Source the helper functions
-source "$(dirname "$0")/../../lib/helpers.sh"
+# Set repository root
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
-# Helper function to run a script if it exists
-run_script() {
-    local script_path="$1"
-    if [ -f "$script_path" ]; then
-        # print_header "Executing $(basename "$script_path")"
-        bash "$script_path"
-        # print_color "$GREEN" "--- Finished $(basename "$script_path") ---"
-    else
-        print_color "$YELLOW" "Warning: Script not found at $script_path. Skipping."
-    fi
-}
+# Source the helper functions
+source "$REPO_ROOT/lib/helpers.sh"
+
+SCRIPT_DIR="$REPO_ROOT/install/system"
 
 print_header "Running System Installation Scripts"
 
