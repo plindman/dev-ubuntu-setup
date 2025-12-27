@@ -3,21 +3,10 @@
 # Script to install Google Antigravity (AI-first IDE).
 # This corresponds to the "Applications (GUI)" -> "Development" category in SOFTWARE_INDEX.md.
 
-set -e
+APP_NAME="Antigravity"
+APP_VERIFY_FUNC="verify_antigravity"
 
-# Set repository root
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
-# Source the helper functions
-source "$REPO_ROOT/lib/helpers.sh"
-source "$REPO_ROOT/install/apps/verify.sh"
-
-print_header "Starting installation of Google Antigravity"
-
-# Check if already installed
-if verify_antigravity; then
-    print_color "$GREEN" "Antigravity is already installed. Skipping."
-else
+install_antigravity() {
     # Install Antigravity via official repository method
     # Verbatim commands from official Google Antigravity documentation
     sudo mkdir -p /etc/apt/keyrings
@@ -29,12 +18,7 @@ else
     # Update after adding new repository
     sudo apt update
     sudo apt install antigravity -y
+}
 
-    # Verify installation
-    if verify_antigravity; then
-        print_color "$GREEN" "Antigravity installation complete."
-    else
-        print_color "$RED" "Antigravity installation failed."
-        exit 1
-    fi
-fi
+# Source shared installation helper
+source "$(dirname "$0")/install_app.sh"

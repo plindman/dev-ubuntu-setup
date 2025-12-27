@@ -5,21 +5,10 @@
 # https://code.visualstudio.com/docs/setup/linux
 # https://itsfoss.gitlab.io/post/how-to-install-vscode-on-ubuntu-2404-2204-or-2004/
 
-set -e
+APP_NAME="Visual Studio Code"
+APP_VERIFY_FUNC="verify_vscode"
 
-# Set repository root
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
-# Source the helper functions
-source "$REPO_ROOT/lib/helpers.sh"
-source "$REPO_ROOT/install/apps/verify.sh"
-
-print_header "Starting installation of Visual Studio Code"
-
-# Check if already installed
-if verify_vscode; then
-    print_color "$GREEN" "Visual Studio Code is already installed. Skipping."
-else
+install_vscode() {
     # Install VS Code via official repository method
     # Verbatim commands from official VS Code documentation
     sudo apt install software-properties-common -y
@@ -28,12 +17,7 @@ else
     # Update after adding new repository
     sudo apt update
     sudo apt install code -y
+}
 
-    # Verify installation
-    if verify_vscode; then
-        print_color "$GREEN" "Visual Studio Code installation complete."
-    else
-        print_color "$RED" "Visual Studio Code installation failed."
-        exit 1
-    fi
-fi
+# Source shared installation helper
+source "$(dirname "$0")/install_app.sh"
