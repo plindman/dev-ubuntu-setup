@@ -14,6 +14,7 @@ source "$REPO_ROOT/lib/helpers.sh"
 print_header "Starting installation of Core System Utilities"
 
 # 1. Upgrade system packages
+# System upgrade is not a package installation, using apt-get directly
 print_color "$GREEN" "Upgrading system packages..."
 # Disable Ubuntu Pro promotional messages
 print_color "$GREEN" "Disabling Ubuntu Pro promotional messages..."

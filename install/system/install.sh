@@ -22,11 +22,11 @@ sudo apt-get -qq update
 # The order of execution is important here.
 run_script "$SCRIPT_DIR/core.sh"
 run_script "$SCRIPT_DIR/networking-tools.sh"
+run_script "$SCRIPT_DIR/zsh.sh"
 run_script "$SCRIPT_DIR/services.sh"
 run_script "$SCRIPT_DIR/system-tools.sh"
 run_script "$SCRIPT_DIR/editors.sh"
 run_script "$SCRIPT_DIR/fonts.sh"
-run_script "$SCRIPT_DIR/zsh.sh"
 run_script "$SCRIPT_DIR/tmux.sh"
 
 print_color "$GREEN" "--- System Installation Complete ---"
