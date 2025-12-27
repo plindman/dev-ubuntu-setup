@@ -18,6 +18,7 @@ print_header "Starting installation of Development Services"
 print_color "$GREEN" "Installing Docker Engine & CLI..."
 
 # Remove old/conflicting packages
+# Verbatim command from official Docker documentation
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
     print_color "$GREEN" "Removing old package: $pkg..."
     sudo apt-get -qq remove "$pkg" || true
@@ -39,6 +40,7 @@ $VERSION_CODENAME}") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Update apt-get cache after adding the new repository
+# Necessary after adding a new apt repository
 print_color "$GREEN" "Updating package lists after adding Docker repo..."
 sudo apt-get -qq update
 
