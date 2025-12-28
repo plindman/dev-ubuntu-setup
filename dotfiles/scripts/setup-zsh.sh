@@ -6,7 +6,7 @@
 set -e
 
 # Source local output helpers
-source "$(dirname "${BASH_SOURCE[0]}")/../lib/output.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/lib/output.sh"
 
 print_header "Zsh Configuration Setup"
 
