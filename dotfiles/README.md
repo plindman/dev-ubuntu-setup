@@ -8,6 +8,24 @@ As outlined in the main `README.md`, we adhere to the [XDG Base Directory Specif
 
 The installation script will be responsible for symlinking these files to their correct locations. For XDG-compliant configurations, the directory structure within `dotfiles/config` will mirror the structure required in `~/.config`.
 
+## Implementation Order
+
+1. ✅ `.zshrc`, `.p10k.zsh` - Zsh shell configs
+2. ✅ `oh-my-zsh/custom/` - Custom plugins, themes for Oh My Zsh
+3. **TODO:** `.config/tmux/tmux.conf.local` - Oh My Tmux customizations
+4. **TODO:** `.config/nvim/`, `.config/micro/`, `.config/nano/` - CLI editors
+5. **TODO:** `.config/htop/htoprc` - htop config
+6. ✅ `.gitconfig` - Git config (needs interactive setup)
+7. **TODO:** `.gitignore_global` - Global git ignores
+8. **TODO:** `.npmrc` - Node.js config
+9. **TODO:** `.config/gh/config.yml` - GitHub CLI config
+10. **TODO:** `.config/uv/uv.toml` - uv Python package manager
+11. **TODO:** `.config/ghostty/config` - Ghostty terminal
+12. **TODO:** `.config/Code/User/settings.json` - VS Code settings
+13. **TODO:** `.config/Antigravity/` - Antigravity IDE
+
+---
+
 ## Planned Dotfiles
 
 Below is a list of applications and the configuration files we plan to manage.
