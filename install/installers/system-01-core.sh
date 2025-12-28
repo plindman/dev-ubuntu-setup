@@ -1,11 +1,6 @@
 #!/bin/bash
-
-# Script to install core system utilities.
-# This corresponds to the "System" -> "Core" category in SOFTWARE_INDEX.md.
-
 APP_NAME="Core System Utilities"
-APP_COMMAND="unzip"
-# No APP_COMMAND - multi-package installer
+APP_COMMAND=("unzip" "gpg" "lsb_release")
 
 install_core() {
     # Upgrade system packages
@@ -20,5 +15,3 @@ install_core() {
     # Install essential core packages
     install_and_show_versions apt-transport-https ca-certificates gnupg lsb-release unzip
 }
-
-# Source shared installation helper

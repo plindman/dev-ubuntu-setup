@@ -34,8 +34,9 @@ The `index` (01, 02...) determines the execution order within the category.
 ### The Framework (`install/lib/module_runner.sh`)
 
 The framework is responsible for:
-1.  **Discovery**: Finding modules by category prefix.
+1.  **Discovery**: Finding modules by category prefix via `_get_modules_for_category`.
 2.  **Execution**: Sourcing modules and calling their `install_` or `verify_` logic.
+3.  **Environment**: Providing the standard library (`output.sh`, `utils.sh`) to the modules.
 
 ---
 
@@ -50,12 +51,12 @@ set -e  # Exit immediately if a command exits with a non-zero status
 
 ### Path Management
 
-Avoid global variables for paths.
+Avoid global variables for paths in sourced scripts.
 
 **For sourcing dependencies:**
 Use inline directory resolution:
 ```bash
-source "$(dirname "${BASH_SOURCE[0]}")/lib/helpers.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/lib/utils.sh"
 ```
 
 **For path usage inside functions:**
@@ -88,21 +89,25 @@ Use verbatim commands from official documentation when specific repositories or 
 
 The verification logic is decoupled from the installation logic.
 
-1.  **`install.sh`**: Runs in installation mode, calling `install_module` which checks existence, installs if missing, and verifies success.
-2.  **`verify.sh`**: Runs in verification mode, calling `verify_module` which only checks existence and reports status.
+1.  **`install.sh`**: Runs in installation mode via `install_category`.
+2.  **`verify.sh`**: Runs in verification mode via `verify_category`.
 
-Both rely on the `APP_COMMAND` variable defined in the installer modules.
+Both rely on the `APP_COMMAND` variable defined in the installer modules or an optional `verify_` function for complex checks.
 
 ---
 
-## Helper Functions (`lib/helpers.sh`)
+## Helper Functions (`lib/`)
 
-| Function | Purpose | Usage |
-|----------|---------|-------|
-| `print_color` | Print colored output | `print_color "$GREEN" "msg"` |
-| `print_header` | Print section header | `print_header "Header"` |
-| `command_exists` | Check if command exists | `command_exists cmd` |
-| `package_installed` | Check if apt package is installed | `package_installed pkg` |
+### Output (`lib/output.sh`)
+Provides colors and printing functions (`print_color`, `print_header`, `print_info`, `print_error`).
+
+### Utilities (`lib/utils.sh`)
+Provides system checks and package management:
+| Function | Purpose |
+|----------|---------|
+| `command_exists` | Check if command exists |
+| `package_installed` | Check if apt package is installed |
+| `install_and_show_versions` | Install apt packages with version output |
 
 ---
 
@@ -110,8 +115,8 @@ Both rely on the `APP_COMMAND` variable defined in the installer modules.
 
 ### File Naming
 - Installers: `category-index-name.sh`
-- Logic: `logic-name.sh` or `module_runner.sh`
-- Helpers: `name.sh`
+- Framework: `module_runner.sh`
+- Libraries: `utils.sh`, `output.sh`
 
 ### XDG Compliance
 Installations should respect XDG paths (`~/.config`, `~/.local/bin`, etc.) when possible.

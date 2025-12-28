@@ -1,6 +1,8 @@
 #!/bin/bash
 #
-# Utility functions for common checks.
+# Utility functions for common checks and package management.
+
+source "$(dirname "${BASH_SOURCE[0]}")"/output.sh"
 
 # Add ~/.local/bin to PATH for command_exists checks during installation
 # This is temporary - only for the duration of the install script

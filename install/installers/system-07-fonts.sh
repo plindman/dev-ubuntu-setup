@@ -27,3 +27,8 @@ install_fonts() {
     # Refresh cache
     fc-cache -f -v
 }
+
+verify_fonts() {
+    # Independent of helpers, uses standard bash/system tools
+    fc-list : family | grep -qi "FiraCode" && fc-list : family | grep -qi "JetBrainsMono"
+}

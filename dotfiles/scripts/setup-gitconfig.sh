@@ -5,17 +5,17 @@
 
 set -e
 
+# Source helper functions for colored output
+source "$(dirname "${BASH_SOURCE[0]}")/../../install/lib/helpers.sh"
+
+print_header "Git Configuration Setup"
+
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
 TEMPLATE_FILE="$DOTFILES_DIR/.gitconfig.template"
 TARGET_FILE="$HOME/.gitconfig"
 
-# Source helper functions for colored output
-REPO_ROOT="$(cd "$DOTFILES_DIR/../.." && pwd)"
-source "$REPO_ROOT/install/lib/helpers.sh"
-
-print_header "Git Configuration Setup"
 
 # Check if .gitconfig already exists
 if [ -f "$TARGET_FILE" ]; then

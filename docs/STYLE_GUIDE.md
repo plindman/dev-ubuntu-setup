@@ -4,7 +4,7 @@ This document outlines the coding and output conventions for scripts in this rep
 
 ## Script Output Color Policy
 
-To ensure console output is consistent and easy to understand, all scripts should use the `lib/helpers.sh` functions and adhere to the following color policy:
+To ensure console output is consistent and easy to understand, all scripts should use the `lib/output.sh` functions and adhere to the following color policy:
 
 *   **BLUE (`print_header`)**: Used for major section headers to announce what a script or a major part of a script is about to do.
 

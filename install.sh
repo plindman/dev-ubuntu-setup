@@ -12,26 +12,41 @@
 
 set -e
 
-# Set repository root
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Set script directory
+MY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Source helper functions
-source "$REPO_ROOT/install/lib/helpers.sh"
+# Source module runner (which sources helpers)
+source "$MY_DIR/install/lib/module_runner.sh"
 
-# Source category orchestrators
-source "$REPO_ROOT/install/cat-system.sh"
-source "$REPO_ROOT/install/cat-desktop.sh"
-source "$REPO_ROOT/install/cat-dev-tools.sh"
-source "$REPO_ROOT/install/cat-apps.sh"
+# --- Installation Wrappers ---
 
-# --- Installation Functions ---
+install_system() {
+    sudo apt-get -qq update
+    install_category "system"
+}
+
+install_desktop() {
+    sudo apt-get -qq update
+    install_category "desktop"
+}
+
+install_dev_tools() {
+    sudo apt-get -qq update
+    install_category "devtools"
+}
+
+install_apps() {
+    sudo apt-get -qq update
+    install_category "apps"
+}
 
 install_all() {
     print_header "Starting Full Installation"
-    install_system
-    install_desktop
-    install_dev_tools
-    install_apps
+    sudo apt-get -qq update
+    install_category "system"
+    install_category "desktop"
+    install_category "devtools"
+    install_category "apps"
     print_header "Full Installation Complete!"
 }
 

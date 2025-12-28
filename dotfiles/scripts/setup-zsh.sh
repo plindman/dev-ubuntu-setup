@@ -5,15 +5,17 @@
 
 set -e
 
-# Get the directory where this script is located
+# Source helper functions for colored output
+source "$(dirname "${BASH_SOURCE[0]}")/../../install/lib/helpers.sh"
+
+print_header "Zsh Configuration Setup"
+
+# Get the directory where this script is located for internal use
+# We use a local variable (technically global in main, but standard naming)
+# or just calculate it when needed.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
 
-# Source helper functions for colored output
-REPO_ROOT="$(cd "$DOTFILES_DIR/../.." && pwd)"
-source "$REPO_ROOT/install/lib/helpers.sh"
-
-print_header "Zsh Configuration Setup"
 
 # Check if Oh My Zsh is installed
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
