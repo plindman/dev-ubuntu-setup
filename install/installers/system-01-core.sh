@@ -4,6 +4,7 @@
 # This corresponds to the "System" -> "Core" category in SOFTWARE_INDEX.md.
 
 APP_NAME="Core System Utilities"
+APP_COMMAND="unzip"
 # No APP_COMMAND - multi-package installer
 
 install_core() {
@@ -21,4 +22,3 @@ install_core() {
 }
 
 # Source shared installation helper
-source "$(dirname "$0")/../lib/install_app.sh"

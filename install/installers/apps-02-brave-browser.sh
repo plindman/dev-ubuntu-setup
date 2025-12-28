@@ -18,4 +18,3 @@ install_brave_browser() {
 }
 
 # Source shared installation helper
-source "$(dirname "$0")/../lib/install_app.sh"

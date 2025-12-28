@@ -11,4 +11,3 @@ install_services() {
 }
 
 # Source shared installation helper
-source "$(dirname "$0")/../lib/install_app.sh"
