@@ -5,8 +5,8 @@
 
 set -e
 
-# Source helper functions for colored output
-source "$(dirname "${BASH_SOURCE[0]}")/../../install/lib/helpers.sh"
+# Source local output helpers
+source "$(dirname "${BASH_SOURCE[0]}")/../lib/output.sh"
 
 print_header "Git Configuration Setup"
 
