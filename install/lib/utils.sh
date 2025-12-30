@@ -12,7 +12,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Check if a command exists
 command_exists() {
-    command -v "$1" &> /dev/null
+    type "$1" &> /dev/null
 }
 
 # Check if running as root
