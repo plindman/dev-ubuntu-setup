@@ -31,7 +31,7 @@ _verify_app_status() {
     fi
 
     for cmd in "${cmds[@]}"; do
-        if ! command -v "$cmd" &> /dev/null; then
+        if ! command_exists "$cmd"; then
             return 1
         fi
     done
@@ -123,6 +123,12 @@ verify_module() {
             print_color "$GREEN" "✅ [OK] $APP_NAME"
         else
             print_color "$RED" "❌ [MISSING] $APP_NAME"
+            
+            # Look for optional details function: verify_details_<component>
+            local details_func=$(grep -o "^verify_details_[a-zA-Z0-9_]*" "$file" | head -n 1)
+            if [[ -n "$details_func" ]] && declare -f "$details_func" > /dev/null; then
+                $details_func
+            fi
         fi
     )
 }
