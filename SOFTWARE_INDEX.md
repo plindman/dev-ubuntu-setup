@@ -95,6 +95,7 @@ This category includes all user-facing graphical applications, for both general 
 
 ### Development
 *   **VS Code**: A popular and highly extensible source-code editor.
+*   **Zed Editor**: A high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
 *   **Google Antigravity**: An AI-first IDE for agentic development.
 *   **Ghostty**: A GPU-accelerated terminal emulator.
 
