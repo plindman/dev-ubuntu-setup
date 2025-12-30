@@ -65,8 +65,8 @@ show_menu() {
     echo "--------------------------------------------------"
     echo "Please select which categories to install:"
     echo "  1) System Utilities"
-    echo "  2) Desktop Components"
-    echo "  3) CLI Development Tools"
+    echo "  2) CLI Development Tools"
+    echo "  3) Desktop Components"
     echo "  4) GUI Applications"
     echo "  5) Optional Software (Large/Heavy)"
     echo "  A) Install ALL Categories (Excludes Optional)"
@@ -77,8 +77,8 @@ show_menu() {
 
     case "$choice" in
         1) install_system ;;
-        2) install_desktop ;;
-        3) install_dev_tools ;;
+        2) install_dev_tools ;;
+        3) install_desktop ;;
         4) install_apps ;;
         5) install_optional ;;
         [aA]) install_all ;;
