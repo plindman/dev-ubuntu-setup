@@ -12,4 +12,13 @@ install_kate() {
     install_and_show_versions kate
 }
 
+post_install_info_kate() {
+    echo "To enable the Filesystem Browser sidebar (recommended for folder navigation):"
+    echo "1. Open Kate."
+    echo "2. Go to Settings -> Configure Kate... (or press Ctrl + ,)."
+    echo "3. Select 'Plugins' from the left sidebar."
+    echo "4. Check the box for 'Filesystem Browser' (under Application plugins)."
+    echo "5. Click OK or Apply."
+}
+
 # Source shared installation helper
