@@ -11,7 +11,8 @@ source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 _verify_app_status() {
     # 1. Check for custom verify function defined in the module
     # The convention is verify_<component_name>
-    local verify_func=$(grep -o "^verify_[a-zA-Z0-9_]*" "$file" | head -n 1)
+    # We must exclude verify_details_* functions which are for reporting only
+    local verify_func=$(grep -o "^verify_[a-zA-Z0-9_]*" "$file" | grep -v "^verify_details_" | head -n 1)
 
     if [[ -n "$verify_func" ]] && declare -f "$verify_func" > /dev/null; then
         $verify_func
