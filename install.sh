@@ -32,7 +32,7 @@ install_desktop() {
 
 install_dev_tools() {
     sudo apt-get -qq update
-    install_category "devtools"
+    install_category "dev-tools"
 }
 
 install_apps() {
@@ -50,7 +50,7 @@ install_all() {
     sudo apt-get -qq update
     install_category "system"
     install_category "desktop"
-    install_category "devtools"
+    install_category "dev-tools"
     install_category "apps"
     print_header "Full Installation Complete!"
     print_info "Note: Optional packages (like TexLive) were NOT installed. Use --optional to install them."
@@ -103,12 +103,14 @@ show_help() {
     echo "  --dev-tools     Install CLI development tools"
     echo "  --apps          Install GUI applications"
     echo "  --optional      Install optional/heavy software"
+    echo "  --list <cat>    List apps in a category (system, desktop, dev-tools, apps, optional)"
     echo "  -h, --help      Show this help message"
     echo ""
     echo "If no arguments are provided, an interactive menu will be displayed."
     echo ""
     echo "Examples:"
     echo "  $0 --all                    # Install standard set"
+    echo "  $0 --list apps              # List GUI apps"
     echo "  $0 --optional               # Install optional components"
     echo "  $0                          # Interactive menu"
 }
@@ -144,6 +146,15 @@ else
             --optional)
                 install_optional
                 shift
+                ;;
+            --list)
+                if [[ -n "$2" && "$2" != --* ]]; then
+                    list_category_apps "$2"
+                    shift 2
+                else
+                     echo "Error: --list requires a category argument (system, desktop, dev-tools, apps, optional)"
+                     exit 1
+                fi
                 ;;
             -h|--help)
                 show_help

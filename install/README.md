@@ -37,14 +37,14 @@ Installs command-line tools and utilities for software development.
 Corresponds to the **Development Tools (CLI)** category in `SOFTWARE_INDEX.md`.
 
 **Scripts:**
-- `devtools-tools.sh` - build-essential, ripgrep
-- `devtools-git.sh` - git-all, gh
-- `devtools-nodejs.sh` - Node.js
-- `devtools-bun.sh` - Bun runtime
-- `devtools-uv.sh` - uv Python package manager
-- `devtools-gemini-cli.sh` - Gemini CLI
-- `devtools-claude-code.sh` - Claude Code
-- `devtools-services.sh` - Docker Engine & CLI
+- `dev-tools-tools.sh` - build-essential, ripgrep
+- `dev-tools-git.sh` - git-all, gh
+- `dev-tools-nodejs.sh` - Node.js
+- `dev-tools-bun.sh` - Bun runtime
+- `dev-tools-uv.sh` - uv Python package manager
+- `dev-tools-gemini-cli.sh` - Gemini CLI
+- `dev-tools-claude-code.sh` - Claude Code
+- `dev-tools-services.sh` - Docker Engine & CLI
 
 ### Desktop (`desktop.sh`)
 
@@ -102,7 +102,7 @@ App scripts define only:
 
 Installer scripts use the prefix convention:
 - `system-*` - System utilities
-- `devtools-*` - CLI development tools
+- `dev-tools-*` - CLI development tools
 - `apps-*` - GUI applications
 
 This makes it easy to identify the category of each script in the `installers/` directory.

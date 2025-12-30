@@ -15,7 +15,7 @@ source "$MY_DIR/install/lib/module_runner.sh"
 verify_all() {
     print_header "Starting Full Verification"
     verify_category "system"
-    verify_category "devtools"
+    verify_category "dev-tools"
     verify_category "desktop"
     verify_category "apps"
     

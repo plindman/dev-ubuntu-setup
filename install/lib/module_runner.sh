@@ -86,6 +86,26 @@ verify_category() {
     done
 }
 
+list_category_apps() {
+    local category="$1"
+    
+    print_header "Apps in Category: $category"
+
+    local files=($(_get_modules_for_category "$category"))
+    
+    if [ ! -e "${files[0]}" ]; then
+        print_warning "No modules found for category: $category"
+        return
+    fi
+
+    for file in "${files[@]}"; do
+        (
+            source "$file"
+            echo " - $APP_NAME"
+        )
+    done
+}
+
 
 install_module() {
     local file="$1"

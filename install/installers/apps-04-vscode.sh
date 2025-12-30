@@ -11,12 +11,22 @@ APP_COMMAND="code"
 install_code() {
     # Install VS Code via official repository method
     # Verbatim commands from official VS Code documentation
-    sudo apt install software-properties-common -y
-    sudo apt-add-repository "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/code stable main"
+
+    # sudo apt install software-properties-common -y
+    # sudo apt-add-repository "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/code stable main"
 
     # Update after adding new repository
-    sudo apt update
-    sudo apt install code -y
+    # sudo apt update
+    # sudo apt install code -y
+
+    # Check if key exists to avoid duplicate logic or errors
+    if [ ! -f /usr/share/keyrings/packages.microsoft.gpg ]; then
+        wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/packages.microsoft.gpg > /dev/null
+    fi
+    echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+
+    sudo apt-get update
+    sudo apt-get install -y code
 }
 
 # Source shared installation helper

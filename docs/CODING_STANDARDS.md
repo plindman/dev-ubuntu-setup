@@ -28,7 +28,7 @@ install_component_name() {
 
 **Naming Convention:**
 Files must follow the pattern: `<category>-<index>-<name>.sh`
-Example: `devtools-01-git.sh`, `system-05-tmux.sh`
+Example: `dev-tools-01-git.sh`, `system-05-tmux.sh`
 The `index` (01, 02...) determines the execution order within the category.
 
 ### The Framework (`install/lib/module_runner.sh`)
