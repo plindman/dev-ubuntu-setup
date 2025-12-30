@@ -107,4 +107,5 @@ This category includes all user-facing graphical applications, for both general 
 Heavy or specialized software that is not installed by default.
 
 *   **TexLive (Full)**: A comprehensive TeX system with all available packages and fonts (~5GB).
+*   **TeXstudio**: A feature-rich LaTeX editor with integrated PDF viewer and advanced syntax highlighting.
 
