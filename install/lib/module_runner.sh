@@ -109,6 +109,14 @@ install_module() {
 
         if _verify_app_status; then
             print_color "$GREEN" "$APP_NAME installation complete."
+            
+            # Check for optional post-install info function
+            local info_func=$(grep -o "^post_install_info_[a-zA-Z0-9_]*" "$file" | head -n 1)
+            if [[ -n "$info_func" ]] && declare -f "$info_func" > /dev/null; then
+                print_color "$CYAN" "\n--- Post-Install Instructions for $APP_NAME ---"
+                $info_func
+                echo ""
+            fi
         else
             print_color "$RED" "$APP_NAME installation failed."
             exit 1
