@@ -40,6 +40,11 @@ install_apps() {
     install_category "apps"
 }
 
+install_optional() {
+    sudo apt-get -qq update
+    install_category "optional"
+}
+
 install_all() {
     print_header "Starting Full Installation"
     sudo apt-get -qq update
@@ -48,6 +53,7 @@ install_all() {
     install_category "devtools"
     install_category "apps"
     print_header "Full Installation Complete!"
+    print_info "Note: Optional packages (like TexLive) were NOT installed. Use --optional to install them."
 }
 
 # --- Interactive Menu ---
@@ -62,7 +68,8 @@ show_menu() {
     echo "  2) Desktop Components"
     echo "  3) CLI Development Tools"
     echo "  4) GUI Applications"
-    echo "  A) Install ALL Categories"
+    echo "  5) Optional Software (Large/Heavy)"
+    echo "  A) Install ALL Categories (Excludes Optional)"
     echo "  Q) Quit"
     echo "--------------------------------------------------"
     read -p "Enter your choice: " choice
@@ -73,6 +80,7 @@ show_menu() {
         2) install_desktop ;;
         3) install_dev_tools ;;
         4) install_apps ;;
+        5) install_optional ;;
         [aA]) install_all ;;
         [qQ]) exit 0 ;;
         *) echo "Invalid choice, please try again." ;;
@@ -89,18 +97,19 @@ show_help() {
     echo "Usage: $0 [options]"
     echo ""
     echo "Options:"
-    echo "  --all           Install all categories"
+    echo "  --all           Install all standard categories (excludes optional)"
     echo "  --system        Install system utilities"
     echo "  --desktop       Install desktop components"
     echo "  --dev-tools     Install CLI development tools"
     echo "  --apps          Install GUI applications"
+    echo "  --optional      Install optional/heavy software"
     echo "  -h, --help      Show this help message"
     echo ""
     echo "If no arguments are provided, an interactive menu will be displayed."
     echo ""
     echo "Examples:"
-    echo "  $0 --all                    # Install everything"
-    echo "  $0 --system --dev-tools     # Install system and dev-tools only"
+    echo "  $0 --all                    # Install standard set"
+    echo "  $0 --optional               # Install optional components"
     echo "  $0                          # Interactive menu"
 }
 
@@ -130,6 +139,10 @@ else
                 ;;
             --apps)
                 install_apps
+                shift
+                ;;
+            --optional)
+                install_optional
                 shift
                 ;;
             -h|--help)

@@ -100,3 +100,11 @@ This category includes all user-facing graphical applications, for both general 
 *   **Google Antigravity**: An AI-first IDE for agentic development.
 *   **Ghostty**: A GPU-accelerated terminal emulator.
 
+---
+
+## Optional Software
+
+Heavy or specialized software that is not installed by default.
+
+*   **TexLive (Full)**: A comprehensive TeX system with all available packages and fonts (~5GB).
+

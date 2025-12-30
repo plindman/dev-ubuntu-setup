@@ -1,0 +1,2 @@
+# Install full TexLive distribution (large download ~5GB)
+sudo apt install texlive-full
