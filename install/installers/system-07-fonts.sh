@@ -29,6 +29,24 @@ install_fonts() {
 }
 
 verify_fonts() {
-    # Independent of helpers, uses standard bash/system tools
+    # Check for FiraCode and JetBrainsMono silently
     fc-list : family | grep -qi "FiraCode" && fc-list : family | grep -qi "JetBrainsMono"
+}
+
+verify_details_fonts() {
+    local missing=()
+    
+    # Check for FiraCode
+    if ! fc-list : family | grep -qi "FiraCode"; then
+        missing+=("FiraCode")
+    fi
+    
+    # Check for JetBrainsMono
+    if ! fc-list : family | grep -qi "JetBrainsMono"; then
+        missing+=("JetBrainsMono")
+    fi
+
+    if [ ${#missing[@]} -gt 0 ]; then
+        print_color "$YELLOW" "   Missing: ${missing[*]}"
+    fi
 }
