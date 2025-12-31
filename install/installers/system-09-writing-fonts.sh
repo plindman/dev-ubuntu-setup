@@ -19,7 +19,7 @@ APT_FONTS=(
 # Manual fonts: "Name|URL"
 WRITING_FONTS=(
     "Inter|https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip"
-    "EBGaramond|https://github.com/georgd/EB-Garamond/releases/download/nightly/EBGaramond.zip"
+    "EB Garamond|https://github.com/georgd/EB-Garamond/releases/download/nightly/EBGaramond.zip"
     "Libertinus|https://github.com/alerque/libertinus/releases/download/v7.051/Libertinus-7.051.zip"
 )
 
