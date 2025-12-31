@@ -27,8 +27,9 @@ Corresponds to the **System** category in `SOFTWARE_INDEX.md`.
 - `system-services.sh` - openssh-server
 - `system-system-tools.sh` - htop, keychain
 - `system-editors.sh` - nano, micro, neovim
-- `system-fonts.sh` - Nerd Fonts
+- `system-dev-fonts.sh` - Nerd Fonts (FiraCode, JetBrainsMono)
 - `system-tmux.sh` - tmux and Oh My Tmux
+- `system-writing-fonts.sh` - Professional Writing Fonts (Inter, Garamond, etc.)
 
 ### Development Tools (`dev-tools.sh`)
 
