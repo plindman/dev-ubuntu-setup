@@ -1,9 +1,9 @@
 #!/bin/bash
-APP_NAME="Build Tools"
-APP_COMMAND=("make" "rg")
+APP_NAME="CLI Development Tools (Build Essentials, rg, fzf)"
+APP_COMMAND=("make" "rg" "fzf")
 
 install_tools() {
-    install_and_show_versions build-essential ripgrep
+    install_and_show_versions build-essential ripgrep fzf
 }
 
 verify_details_tools() {
@@ -15,6 +15,10 @@ verify_details_tools() {
     
     if ! command_exists "rg"; then
         missing+=("ripgrep (rg)")
+    fi
+
+    if ! command_exists "fzf"; then
+        missing+=("fzf")
     fi
 
     if [ ${#missing[@]} -gt 0 ]; then
