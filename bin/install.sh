@@ -49,8 +49,8 @@ install_all() {
     print_header "Starting Full Installation"
     sudo apt-get -qq update
     install_category "system"
-    install_category "desktop"
     install_category "dev-tools"
+    install_category "desktop"
     install_category "apps"
     print_header "Full Installation Complete!"
     print_info "Note: Optional packages (like TexLive) were NOT installed. Use --optional to install them."
