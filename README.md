@@ -13,20 +13,18 @@ This method allows for a quick setup using a single command. Use this if you tru
 ```bash
 # This command will download and execute the install.sh script directly.
 # Ensure you understand what the script does before running.
-curl -fsSL https://raw.githubusercontent.com/<your-username>/dev-workstation-setup/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/plindman/dev-ubuntu-setup/main/install.sh | bash
 ```
-**Note:** Replace `<your-username>` with your actual GitHub username once the repository is pushed.
 
 ### Manual Install (Recommended for Transparency and Control)
 
 This method provides more transparency and control, allowing you to review the scripts before execution and customize the installation process.
 
 ```bash
-git clone https://github.com/<your-username>/dev-workstation-setup.git
-cd dev-workstation-setup
+git clone https://github.com/plindman/dev-ubuntu-setup.git
+cd dev-ubuntu-setup
 ./install.sh
 ```
-**Note:** Replace `<your-username>` with your actual GitHub username once the repository is pushed.
 
 The `install.sh` script will guide you through the installation process. You can choose to install everything at once or select specific categories of tools.
 
