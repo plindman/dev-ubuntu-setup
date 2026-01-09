@@ -33,7 +33,7 @@ install_and_show_versions() {
     local packages=("$@")
     print_color "$GREEN" "Installing/Upgrading apt packages: ${packages[*]}..."
 
-    if sudo apt-get -qq install -y "${packages[@]}"; then
+    if sudo apt-get -qq install -y "${packages[@]}" > /dev/null; then
         print_color "$GREEN" "Successfully installed/upgraded packages."
         print_color "$GREEN" "Installed Versions:"
         dpkg-query -W -f='  ${Package}: ${Version}\n' "${packages[@]}" 2>/dev/null || \
