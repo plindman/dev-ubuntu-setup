@@ -8,7 +8,11 @@ APP_COMMAND="bun"
 
 install_bun() {
     # Install Bun via its official script, respecting BUN_INSTALL for XDG compliance
-    BUN_INSTALL="$HOME/.local" curl -fsSL https://bun.sh/install | bash
+    # We pass it directly to bash to ensure it is picked up
+    curl -fsSL https://bun.sh/install | BUN_INSTALL="$HOME/.local" bash
+
+    # Export both potential locations for current session verification
+    export PATH="$HOME/.local/bin:$HOME/.bun/bin:$PATH"
 }
 
 # Source shared installation helper
