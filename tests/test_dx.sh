@@ -17,8 +17,14 @@ print_step "Ensuring base test image is ready..."
 docker build -t dev-setup-test-base -f tests/Dockerfile.test-base .
 
 # 2. Run the test
+# Create a local logs directory
+mkdir -p tests/logs
+
 print_step "Starting DX test in clean container..."
-docker run --rm dev-setup-test-base bash -c "
+# We mount tests/logs to the container's log path
+docker run --rm \
+    -v "$(pwd)/tests/logs:/home/testuser/.local/state/dev-ubuntu-setup" \
+    dev-setup-test-base bash -c "
     set -e
     echo '==> [USER] Fetching and running the installer from GitHub...'
     # We run without flags to test the 'Install All' default behavior
