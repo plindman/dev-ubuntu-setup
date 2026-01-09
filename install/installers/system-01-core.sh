@@ -3,6 +3,9 @@ APP_NAME="Core System Utilities"
 APP_COMMAND=("unzip" "gpg" "lsb_release")
 
 install_core() {
+    # Install apt-utils first to avoid debconf warnings
+    apt_update && install_and_show_versions apt-utils
+
     # Upgrade system packages
     print_color "$GREEN" "Disabling Ubuntu Pro promotional messages..."
     sudo pro disable esm-apps > /dev/null 2>&1 || true
@@ -13,5 +16,5 @@ install_core() {
     sudo apt-get -qq upgrade -y > /dev/null
 
     # Install essential core packages
-    install_and_show_versions apt-transport-https ca-certificates gnupg lsb-release unzip software-properties-common apt-utils
+    install_and_show_versions apt-transport-https ca-certificates gnupg lsb-release unzip software-properties-common
 }
