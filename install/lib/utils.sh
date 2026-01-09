@@ -73,17 +73,20 @@ add_apt_repo() {
         return 1
     fi
     
+    # 3. Add the repo line
     # Ensure it starts with 'deb '
     local finalized_repo_line="$repo_line"
-    if [[ "$finalized_repo_line" != deb\ * ]]; then
+    if [[ "${finalized_repo_line:0:4}" != "deb " ]]; then
         finalized_repo_line="deb $finalized_repo_line"
     fi
 
-
-    if [[ "$finalized_repo_line" == *\"]"* ]]; then
-        finalized_repo_line="${finalized_repo_line/\\]/ signed-by=\\/usr\\/share\\/keyrings\\/${name}.gpg\\]}"
+    # Inject signed-by field
+    if [[ "$finalized_repo_line" == *"]"* ]]; then
+        # Add inside existing brackets
+        finalized_repo_line="${finalized_repo_line/]/ signed-by=\/usr\/share\/keyrings\/${name}.gpg]}"
     else
-        finalized_repo_line="${finalized_repo_line/deb /deb [signed-by=\\/usr\\/share\\/keyrings\\/${name}.gpg] }"
+        # Add new brackets after 'deb '
+        finalized_repo_line="${finalized_repo_line/deb /deb [signed-by=\/usr\/share\/keyrings\/${name}.gpg] }"
     fi
     
     echo "$finalized_repo_line" | sudo tee "/etc/apt/sources.list.d/${name}.list" > /dev/null
