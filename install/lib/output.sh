@@ -21,7 +21,8 @@ print_color() {
 
 # Print a section header
 print_header() {
-    print_color "$BLUE" "\n=== $1 ==="
+    echo ""
+    print_color "$BLUE" "=== $1 ==="
 }
 
 # Print info message
