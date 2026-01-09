@@ -4,9 +4,9 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/output.sh"
 
-# Add ~/.local/bin to PATH for command_exists checks during installation
+# Add ~/.local/bin and mise shims to PATH for command_exists checks during installation
 # This is temporary - only for the duration of the install script
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
 
 # --- Utility Functions ---
 
