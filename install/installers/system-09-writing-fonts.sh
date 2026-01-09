@@ -66,7 +66,7 @@ install_writing_fonts() {
 
         # Download
         local zip_file="$temp_dir/$font_name.zip"
-        if wget -q --show-progress "$font_url" -O "$zip_file"; then
+        if wget -q "$font_url" -O "$zip_file"; then
              # Unzip flattening directory structure (-j), overwriting (-o), only font files
              # We look for .ttf and .otf. Some zips might have one or the other.
              if unzip -oj "$zip_file" "*.ttf" "*.otf" -d "$font_dir" > /dev/null 2>&1; then
@@ -88,7 +88,7 @@ install_writing_fonts() {
     # Refresh cache only if new fonts were installed or need registration
     if $cache_needs_update; then
         print_info "Refreshing font cache..."
-        fc-cache -f -v > /dev/null
+        fc-cache -f > /dev/null
     fi
 }
 

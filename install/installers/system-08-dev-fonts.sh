@@ -53,7 +53,7 @@ install_fonts() {
     # Refresh cache only if new fonts were installed or need registration
     if $cache_needs_update; then
         print_info "Refreshing font cache..."
-        fc-cache -f -v > /dev/null
+        fc-cache -f > /dev/null
     fi
 }
 

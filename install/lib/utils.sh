@@ -79,7 +79,7 @@ install_and_show_versions() {
             
             echo "$finalized_repo_line" | sudo tee "/etc/apt/sources.list.d/${name}.list" > /dev/null
             
-            # 4. Update apt cache for this repo
-            sudo apt-get -qq update
-        }
-        
+                # 4. Update apt cache for this repo
+                sudo apt-get -qq update > /dev/null
+            }
+            

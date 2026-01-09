@@ -9,7 +9,7 @@ APP_COMMAND="zed"
 
 install_zed() {
     # Install Zed via official script
-    curl -fsSL https://zed.dev/install.sh | sh > /dev/null
+    curl -fsSL https://zed.dev/install.sh | sh > /dev/null 2>&1
 }
 
 # Source shared installation helper
