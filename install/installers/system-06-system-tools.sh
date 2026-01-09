@@ -7,7 +7,7 @@ APP_NAME="System Tools"
 APP_COMMAND=("htop" "keychain")
 
 install_system_tools() {
-    install_and_show_versions htop keychain
+    quiet_apt_install htop keychain
 }
 
 # Source shared installation helper

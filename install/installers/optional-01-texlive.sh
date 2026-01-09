@@ -21,5 +21,5 @@ install_texlive() {
         fi
     fi
 
-    install_and_show_versions texlive-full
+    quiet_apt_install texlive-full
 }

@@ -7,7 +7,7 @@ APP_NAME="tmux and Oh My Tmux"
 APP_COMMAND="tmux"
 
 install_tmux() {
-    install_and_show_versions tmux
+    quiet_apt_install tmux
 
     # Oh My Tmux
     # Framework is cloned into $HOME/.local/share/oh-my-tmux (XDG compliant)

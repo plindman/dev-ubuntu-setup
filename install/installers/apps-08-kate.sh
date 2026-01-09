@@ -9,7 +9,7 @@ APP_COMMAND="kate"
 
 install_kate() {
     # Install Kate via official repository
-    install_and_show_versions kate
+    quiet_apt_install kate
 }
 
 post_install_info_kate() {

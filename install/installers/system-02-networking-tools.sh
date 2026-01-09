@@ -7,7 +7,7 @@ APP_NAME="Networking Tools"
 APP_COMMAND=("curl" "wget")
 
 install_networking_tools() {
-    install_and_show_versions curl wget
+    quiet_apt_install curl wget
 }
 
 # Source shared installation helper

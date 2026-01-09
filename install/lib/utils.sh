@@ -26,7 +26,7 @@ package_installed() {
 }
 
 # Function to update apt cache quietly.
-apt_update() {
+quiet_apt_update() {
     sudo apt-get -qq update > /dev/null
 }
 
@@ -34,7 +34,7 @@ apt_update() {
 
 # Function to install apt packages silently and show their versions.
 # Returns 0 on success, 1 on failure.
-install_and_show_versions() {
+quiet_apt_install() {
     local packages=("$@")
     print_color "$GREEN" "Installing/Upgrading apt packages: ${packages[*]}..."
 
@@ -49,7 +49,7 @@ install_and_show_versions() {
         return 1
     fi
 }
-        
+
 # Helper to add a third-party APT repository quietly.
 # Usage: add_apt_repo "name" "gpg_url" "repo_url"
 add_apt_repo() {
@@ -85,6 +85,5 @@ add_apt_repo() {
     echo "$finalized_repo_line" | sudo tee "/etc/apt/sources.list.d/${name}.list" > /dev/null
     
     # 4. Update apt cache for this repo
-    apt_update
+    quiet_apt_update
 }
-            

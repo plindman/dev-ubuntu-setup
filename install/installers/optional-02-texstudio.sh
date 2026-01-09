@@ -7,7 +7,7 @@ APP_NAME="TeXstudio"
 APP_COMMAND="texstudio"
 
 install_texstudio() {
-    install_and_show_versions texstudio
+    quiet_apt_install texstudio
 }
 
 post_install_info_texstudio() {

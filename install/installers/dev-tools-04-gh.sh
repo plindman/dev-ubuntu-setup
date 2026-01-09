@@ -9,7 +9,7 @@ APP_COMMAND="gh"
 install_gh() {
     # Ensure wget is present
     if ! command_exists "wget"; then
-        install_and_show_versions wget
+        quiet_apt_install wget
     fi
 
     # Use add_apt_repo helper for repository and GPG setup
@@ -18,7 +18,7 @@ install_gh() {
         "[arch=$(dpkg --print-architecture)] https://cli.github.com/packages stable main"
 
     # Use our helper for the actual install
-    install_and_show_versions gh
+    quiet_apt_install gh
 }
 
 # Source shared installation helper

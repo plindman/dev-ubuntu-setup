@@ -10,7 +10,7 @@ APP_COMMAND="zsh"
 
 install_zsh() {
     # Install zsh
-    install_and_show_versions zsh
+    quiet_apt_install zsh
 
     # Install Oh My Zsh (non-interactively)
     if [ ! -d "$HOME/.oh-my-zsh" ]; then

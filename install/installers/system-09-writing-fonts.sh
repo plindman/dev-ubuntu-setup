@@ -26,11 +26,11 @@ WRITING_FONTS=(
 
 install_writing_fonts() {
     # Ensure fontconfig is installed for fc-list/fc-cache
-    install_and_show_versions fontconfig
+    quiet_apt_install fontconfig
 
     # 1. Install apt-based fonts
     print_info "Installing professional fonts via apt..."
-    install_and_show_versions "${APT_FONTS[@]}"
+    quiet_apt_install "${APT_FONTS[@]}"
 
     # 2. Install manual fonts
     local temp_dir=""

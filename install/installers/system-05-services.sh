@@ -7,7 +7,7 @@ APP_NAME="System Services"
 APP_COMMAND="ssh"
 
 install_services() {
-    install_and_show_versions openssh-server
+    quiet_apt_install openssh-server
 }
 
 # Source shared installation helper

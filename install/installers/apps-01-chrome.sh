@@ -13,7 +13,7 @@ install_google_chrome() {
         "https://dl.google.com/linux/linux_signing_key.pub" \
         "http://dl.google.com/linux/chrome/deb/ stable main"
 
-    install_and_show_versions google-chrome-stable
+    quiet_apt_install google-chrome-stable
 }
 
 # Source shared installation helper

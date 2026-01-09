@@ -12,7 +12,7 @@ install_brave_browser() {
         "https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg" \
         "https://brave-browser-apt-release.s3.brave.com/ stable main"
 
-    install_and_show_versions brave-browser
+    quiet_apt_install brave-browser
 }
 
 

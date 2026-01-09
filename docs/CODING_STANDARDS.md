@@ -22,7 +22,7 @@ APP_COMMAND="command-to-verify" # Can be a string or an array ("cmd1" "cmd2")
 
 install_component_name() {
     # Installation logic here
-    # Use helpers like install_and_show_versions
+    # Use helpers like quiet_apt_install
 }
 ```
 
@@ -72,11 +72,11 @@ my_function() {
 
 ## Package Installation Standards
 
-### `install_and_show_versions()`
+### `quiet_apt_install()`
 
 Use this helper for standard apt package installations:
 ```bash
-install_and_show_versions pkg1 pkg2
+quiet_apt_install pkg1 pkg2
 ```
 
 ### Verbatim Commands
@@ -107,7 +107,7 @@ Provides system checks and package management:
 |----------|---------|
 | `command_exists` | Check if command exists |
 | `package_installed` | Check if apt package is installed |
-| `install_and_show_versions` | Install apt packages with version output |
+| `quiet_apt_install` | Install apt packages with version output |
 
 ---
 

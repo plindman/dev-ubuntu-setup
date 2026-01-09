@@ -7,7 +7,7 @@ APP_NAME="Git"
 APP_COMMAND="git"
 
 install_git() {
-    install_and_show_versions git-all
+    quiet_apt_install git-all
 }
 
 # Source shared installation helper

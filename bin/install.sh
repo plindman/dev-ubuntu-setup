@@ -42,7 +42,7 @@ install_optional() {
 
 install_all() {
     print_header "Starting Full Installation"
-    apt_update
+    quiet_apt_update
     install_category "system"
     install_category "dev-tools"
     install_category "desktop"
@@ -81,7 +81,7 @@ if [[ $# -eq 0 ]]; then
 else
     # Run update once if we are doing any installations
     if [[ "$1" != "--list" && "$1" != "-h" && "$1" != "--help" ]]; then
-        apt_update
+        quiet_apt_update
     fi
 
     # Parse arguments

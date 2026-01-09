@@ -12,7 +12,7 @@ install_antigravity() {
         "https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg" \
         "https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main"
 
-    install_and_show_versions antigravity
+    quiet_apt_install antigravity
 }
 
 # Source shared installation helper

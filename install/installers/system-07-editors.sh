@@ -7,7 +7,7 @@ APP_NAME="CLI Editors"
 APP_COMMAND=("nano" "micro" "nvim")
 
 install_editors() {
-    install_and_show_versions nano micro neovim
+    quiet_apt_install nano micro neovim
 }
 
 # Source shared installation helper

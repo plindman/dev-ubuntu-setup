@@ -12,7 +12,7 @@ install_vivaldi_stable() {
         "https://repo.vivaldi.com/archive/linux_signing_key.pub" \
         "https://repo.vivaldi.com/archive/deb/ stable main"
 
-    install_and_show_versions vivaldi-stable
+    quiet_apt_install vivaldi-stable
 }
 
 # Source shared installation helper

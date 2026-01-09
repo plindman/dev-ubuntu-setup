@@ -26,7 +26,7 @@ install_docker() {
         "[arch=$(dpkg --print-architecture)] $docker_repo $os_codename stable"
 
     # Install Docker packages
-    install_and_show_versions docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    quiet_apt_install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
     # Add current user to docker group
     local current_user=$(id -u -n)

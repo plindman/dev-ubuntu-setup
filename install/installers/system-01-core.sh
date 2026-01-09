@@ -4,7 +4,7 @@ APP_COMMAND=("unzip" "gpg" "lsb_release")
 
 install_core() {
     # Install apt-utils first to avoid debconf warnings
-    apt_update && install_and_show_versions apt-utils
+    quiet_apt_update && quiet_apt_install apt-utils
 
     # Upgrade system packages
     print_color "$GREEN" "Disabling Ubuntu Pro promotional messages..."
@@ -16,5 +16,5 @@ install_core() {
     sudo apt-get -qq upgrade -y > /dev/null
 
     # Install essential core packages
-    install_and_show_versions apt-transport-https ca-certificates gnupg lsb-release unzip software-properties-common
+    quiet_apt_install apt-transport-https ca-certificates gnupg lsb-release unzip software-properties-common
 }

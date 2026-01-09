@@ -9,7 +9,7 @@ FONTS=("FiraCode" "JetBrainsMono")
 
 install_fonts() {
     # Ensure fontconfig is installed for fc-list/fc-cache
-    install_and_show_versions fontconfig
+    quiet_apt_install fontconfig
 
     local base_url="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1"
     local temp_dir=""

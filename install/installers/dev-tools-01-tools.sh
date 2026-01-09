@@ -3,7 +3,7 @@ APP_NAME="CLI Development Tools (Build Essentials, rg, fzf)"
 APP_COMMAND=("make" "rg" "fzf")
 
 install_tools() {
-    install_and_show_versions build-essential ripgrep fzf
+    quiet_apt_install build-essential ripgrep fzf
 }
 
 verify_details_tools() {
