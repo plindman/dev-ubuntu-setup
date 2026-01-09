@@ -22,9 +22,6 @@ docker run --rm dev-setup-test-base bash -c "
     set -e
     echo '==> [USER] Fetching and running the installer from GitHub...'
     # We run without flags to test the 'Install All' default behavior
+    # Verification is now built into this command
     curl -fsSL https://raw.githubusercontent.com/plindman/dev-ubuntu-setup/main/install.sh | bash
-    
-    echo '==> [USER] Verifying final state...'
-    cd ~/scripts/dev-ubuntu-setup
-    ./bin/verify.sh
 "
