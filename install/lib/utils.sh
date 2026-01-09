@@ -41,6 +41,45 @@ install_and_show_versions() {
         return 0
     else
         print_color "$RED" "Error: Failed to install/upgrade apt packages: ${packages[*]}..."
-        return 1
-    fi
-}
+                return 1
+            fi
+        }
+        
+        # Helper to add a third-party APT repository quietly.
+        # Usage: add_apt_repo "name" "gpg_url" "repo_url"
+        add_apt_repo() {
+            local name="        "
+            local gpg_url="$2"
+            local repo_line="$3"
+            
+            print_info "Adding repository: $name..."
+            
+            # 1. Ensure keyring directory exists
+            sudo mkdir -p -m 755 /etc/apt/keyrings
+            
+            # 2. Download and dearmor GPG key
+            # We use a temp file to avoid piping directly to gpg which can be brittle
+            local tmp_key=$(mktemp)
+            if curl -fsSL "$gpg_url" -o "$tmp_key"; then
+                cat "$tmp_key" | sudo gpg --dearmor --yes -o "/usr/share/keyrings/${name}.gpg"
+                sudo chmod go+r "/usr/share/keyrings/${name}.gpg"
+                rm "$tmp_key"
+            else
+                print_error "Failed to download GPG key for $name"
+                return 1
+            fi
+            
+            # 3. Add the repo line
+            # We use the signed-by field for better security
+            local finalized_repo_line="${repo_line/\]/ signed-by=\/usr\/share\/keyrings\/${name}.gpg\]}"
+            # If the line didn't have brackets at all, we handle it
+            if [[ "$finalized_repo_line" == "$repo_line" ]]; then
+                finalized_repo_line="deb [signed-by=/usr/share/keyrings/${name}.gpg] $repo_line"
+            fi
+            
+            echo "$finalized_repo_line" | sudo tee "/etc/apt/sources.list.d/${name}.list" > /dev/null
+            
+            # 4. Update apt cache for this repo
+            sudo apt-get -qq update
+        }
+        
