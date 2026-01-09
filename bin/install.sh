@@ -21,33 +21,28 @@ source "$MY_DIR/../install/lib/module_runner.sh"
 # --- Installation Wrappers ---
 
 install_system() {
-    sudo apt-get -qq update
     install_category "system"
 }
 
 install_desktop() {
-    sudo apt-get -qq update
     install_category "desktop"
 }
 
 install_dev_tools() {
-    sudo apt-get -qq update
     install_category "dev-tools"
 }
 
 install_apps() {
-    sudo apt-get -qq update
     install_category "apps"
 }
 
 install_optional() {
-    sudo apt-get -qq update
     install_category "optional"
 }
 
 install_all() {
     print_header "Starting Full Installation"
-    sudo apt-get -qq update
+    apt_update
     install_category "system"
     install_category "dev-tools"
     install_category "desktop"
@@ -84,6 +79,11 @@ if [[ $# -eq 0 ]]; then
     # No arguments - default to install all
     install_all
 else
+    # Run update once if we are doing any installations
+    if [[ "$1" != "--list" && "$1" != "-h" && "$1" != "--help" ]]; then
+        apt_update
+    fi
+
     # Parse arguments
     while [[ $# -gt 0 ]]; do
         case "$1" in
