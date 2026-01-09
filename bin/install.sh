@@ -12,6 +12,9 @@
 
 set -e
 
+# Ensure non-interactive for all apt calls
+export DEBIAN_FRONTEND=noninteractive
+
 # Set script directory
 MY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
