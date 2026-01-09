@@ -10,7 +10,7 @@ install_core() {
     sudo pro disable livepatch > /dev/null 2>&1 || true
     sudo pro disable uc > /dev/null 2>&1 || true
 
-    sudo apt-get -qq upgrade -y
+    sudo apt-get -qq upgrade -y > /dev/null
 
     # Install essential core packages
     install_and_show_versions apt-transport-https ca-certificates gnupg lsb-release unzip

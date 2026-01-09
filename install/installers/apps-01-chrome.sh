@@ -14,8 +14,8 @@ install_google_chrome() {
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
     # Update after adding new repository
-    sudo apt update
-    sudo apt install google-chrome-stable -y
+    sudo apt-get -qq update
+    install_and_show_versions google-chrome-stable
 }
 
 # Source shared installation helper

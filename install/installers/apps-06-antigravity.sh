@@ -16,8 +16,8 @@ install_antigravity() {
         sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
 
     # Update after adding new repository
-    sudo apt update
-    sudo apt install antigravity -y
+    sudo apt-get -qq update
+    install_and_show_versions antigravity
 }
 
 # Source shared installation helper

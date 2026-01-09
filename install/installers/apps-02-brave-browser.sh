@@ -13,8 +13,8 @@ install_brave_browser() {
     echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 
     # Update after adding new repository
-    sudo apt update
-    sudo apt install brave-browser -y
+    sudo apt-get -qq update
+    install_and_show_versions brave-browser
 }
 
 # Source shared installation helper

@@ -22,8 +22,8 @@ install_code() {
     echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
 
     # Update after adding new repository
-    sudo apt-get update
-    sudo apt-get install -y code
+    sudo apt-get -qq update
+    install_and_show_versions code
 }
 
 # Source shared installation helper

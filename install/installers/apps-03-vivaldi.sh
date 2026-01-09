@@ -15,8 +15,8 @@ install_vivaldi_stable() {
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/vivaldi.gpg] https://repo.vivaldi.com/archive/deb/ stable main" | sudo tee /etc/apt/sources.list.d/vivaldi.list
 
     # Update after adding new repository
-    sudo apt update
-    sudo apt install vivaldi-stable -y
+    sudo apt-get -qq update
+    install_and_show_versions vivaldi-stable
 }
 
 # Source shared installation helper
