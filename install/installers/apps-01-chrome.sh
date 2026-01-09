@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Script to install Google Chrome.
+# Pre-requisites: system-01-core.sh (for gpg), system-02-networking-tools.sh (for wget), add_apt_repo helper.
 # This corresponds to the "Applications (GUI)" -> "Web Browsers" category in SOFTWARE_INDEX.md.
 # https://itsfoss.gitlab.io/post/how-to-install-google-chrome-on-ubuntu-2404-2204-or-2004/
 
@@ -8,13 +9,10 @@ APP_NAME="Google Chrome"
 APP_COMMAND="google-chrome"
 
 install_google_chrome() {
-    # Install Chrome via official repository method
-    # Verbatim commands from official Google Chrome installation guide
-    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+    add_apt_repo "google-chrome" \
+        "https://dl.google.com/linux/linux_signing_key.pub" \
+        "http://dl.google.com/linux/chrome/deb/ stable main"
 
-    # Update after adding new repository
-    sudo apt-get -qq update
     install_and_show_versions google-chrome-stable
 }
 

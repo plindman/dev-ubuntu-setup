@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Script to install Professional Writing Fonts.
+# Pre-requisites: system-01-core.sh (for unzip).
 # Includes: Inter, EB Garamond, Libertinus (via GitHub) 
 # and IBM Plex, Noto, TeX Gyre, etc. (via apt).
 # This corresponds to the "System" -> "Writing Fonts" category.

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Script to install Node.js via mise.
+# Pre-requisites: dev-tools-02-mise.sh.
 # This corresponds to the "Development Tools (CLI)" -> "Languages & Runtimes" category.
 
 APP_NAME="Node.js"

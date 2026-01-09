@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Script to install Nerd Fonts (FiraCode and JetBrainsMono).
+# Pre-requisites: system-01-core.sh (for unzip).
 # This corresponds to the "System" -> "Fonts" category.
 
 APP_NAME="Nerd Fonts (FiraCode, JetBrainsMono)"
@@ -52,7 +53,7 @@ install_fonts() {
     # Refresh cache only if new fonts were installed or need registration
     if $cache_needs_update; then
         print_info "Refreshing font cache..."
-        fc-cache -f -v
+        fc-cache -f -v > /dev/null
     fi
 }
 

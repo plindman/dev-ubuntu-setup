@@ -1,22 +1,17 @@
 #!/bin/bash
 
 # Script to install Google Antigravity (AI-first IDE).
+# Pre-requisites: system-01-core.sh (for gpg), system-02-networking-tools.sh (for curl), add_apt_repo helper.
 # This corresponds to the "Applications (GUI)" -> "Development" category in SOFTWARE_INDEX.md.
 
 APP_NAME="Antigravity"
 APP_COMMAND="antigravity"
 
 install_antigravity() {
-    # Install Antigravity via official repository method
-    # Verbatim commands from official Google Antigravity documentation
-    sudo mkdir -p /etc/apt/keyrings
-    curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | \
-        sudo gpg --dearmor --yes -o /etc/apt/keyrings/antigravity-repo-key.gpg
-    echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" | \
-        sudo tee /etc/apt/sources.list.d/antigravity.list > /dev/null
+    add_apt_repo "antigravity" \
+        "https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg" \
+        "https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main"
 
-    # Update after adding new repository
-    sudo apt-get -qq update
     install_and_show_versions antigravity
 }
 
