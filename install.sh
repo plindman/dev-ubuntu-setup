@@ -21,7 +21,7 @@ install_package() {
     local pkg=$1
     if ! command_exists "$pkg"; then
         print_step "$pkg not found. Installing..."
-        sudo apt-get update -qq
+        sudo apt-get -qq update > /dev/null
         sudo apt-get install -y "$pkg" -qq
     fi
 }
