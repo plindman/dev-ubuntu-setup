@@ -17,8 +17,9 @@ print_step "Ensuring base test image is ready..."
 docker build -t dev-setup-test-base -f tests/Dockerfile.test-base .
 
 # 2. Run the test
-# Create a local logs directory
+# Create a local logs directory and ensure it is writable
 mkdir -p tests/logs
+chmod 777 tests/logs
 
 print_step "Starting DX test in clean container..."
 # We mount tests/logs to the container's log path
