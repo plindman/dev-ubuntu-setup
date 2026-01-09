@@ -13,12 +13,21 @@ print_step() {
     echo -e "\033[1;34m==>\033[0m \033[1m$1\033[0m"
 }
 
+command_exists() {
+    type "$1" &> /dev/null
+}
+
+install_package() {
+    local pkg=$1
+    if ! command_exists "$pkg"; then
+        print_step "$pkg not found. Installing..."
+        sudo apt-get update -qq
+        sudo apt-get install -y "$pkg" -qq
+    fi
+}
+
 # 1. Ensure git is installed
-if ! command -v git &> /dev/null; then
-    print_step "Git not found. Installing..."
-    sudo apt-get update -qq
-    sudo apt-get install -y git -qq
-fi
+install_package "git"
 
 # 2. Clone or Update repo
 if [ ! -d "$TARGET_DIR" ]; then
