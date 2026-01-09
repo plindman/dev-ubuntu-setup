@@ -5,6 +5,7 @@
 set -e
 
 # Configuration
+export DEBIAN_FRONTEND=noninteractive
 REPO_URL="${REPO_URL:-https://github.com/plindman/dev-ubuntu-setup.git}"
 UUID=$(cat /proc/sys/kernel/random/uuid 2>/dev/null || date +%s%N)
 TARGET_DIR="/tmp/dev-ubuntu-setup-$UUID"
