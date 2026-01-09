@@ -17,15 +17,12 @@ print_step "Ensuring base test image is ready..."
 docker build -t dev-setup-test-base -f tests/Dockerfile.test-base .
 
 # 2. Run the test
-# We use -i to keep it interactive so we see output in real-time
 print_step "Starting DX test in clean container..."
 docker run --rm dev-setup-test-base bash -c "
     set -e
-    echo '==> [USER] Installing curl...'
-    sudo apt-get update -qq && sudo apt-get install -y curl -qq
-    
     echo '==> [USER] Fetching and running the installer from GitHub...'
-    curl -fsSL https://raw.githubusercontent.com/plindman/dev-ubuntu-setup/main/install.sh | bash -s -- --all
+    # We run without flags to test the 'Install All' default behavior
+    curl -fsSL https://raw.githubusercontent.com/plindman/dev-ubuntu-setup/main/install.sh | bash
     
     echo '==> [USER] Verifying final state...'
     cd ~/scripts/dev-ubuntu-setup
