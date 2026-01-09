@@ -16,21 +16,14 @@ install_docker() {
         sudo apt-get -qq remove "$pkg" || true
     done
 
-    # Add Docker's official GPG key:
-    install_and_show_versions ca-certificates curl gnupg lsb-release
-    sudo install -m 0755 -d /etc/apt/keyrings
-    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-    sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-    # Add the repository to Apt sources:
-    echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-      $(. /etc/os-release && echo "${UBUNTU_CODENAME:-
-$VERSION_CODENAME}") stable" | \
-      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-    # Update apt-get cache after adding the new repository
-    sudo apt-get -qq update
+    # Add Docker's official GPG key and Repository:
+    # Verbatim repo string logic from official Docker documentation
+    local docker_repo="https://download.docker.com/linux/ubuntu"
+    local os_codename=$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+    
+    add_apt_repo "docker" \
+        "https://download.docker.com/linux/ubuntu/gpg" \
+        "[arch=$(dpkg --print-architecture)] $docker_repo $os_codename stable"
 
     # Install Docker packages
     install_and_show_versions docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
