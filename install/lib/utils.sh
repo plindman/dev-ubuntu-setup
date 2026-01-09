@@ -73,11 +73,12 @@ add_apt_repo() {
         return 1
     fi
     
-    # 3. Add the repo line
+    # Ensure it starts with 'deb '
     local finalized_repo_line="$repo_line"
-    if [[ ! "$finalized_repo_line" =~ ^deb\  ]]; then
+    if [[ "$finalized_repo_line" != deb\ * ]]; then
         finalized_repo_line="deb $finalized_repo_line"
     fi
+
 
     if [[ "$finalized_repo_line" == *\"]"* ]]; then
         finalized_repo_line="${finalized_repo_line/\\]/ signed-by=\\/usr\\/share\\/keyrings\\/${name}.gpg\\]}"
