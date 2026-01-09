@@ -36,8 +36,9 @@ $VERSION_CODENAME}") stable" | \
     install_and_show_versions docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
     # Add current user to docker group
+    local current_user=$(id -u -n)
     sudo groupadd docker || true
-    sudo usermod -aG docker "${USER}"
+    sudo usermod -aG docker "$current_user"
 }
 
 # Source shared installation helper
