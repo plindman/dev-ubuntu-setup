@@ -56,77 +56,37 @@ install_all() {
     print_info "Note: Optional packages (like TexLive) were NOT installed. Use --optional to install them."
 }
 
-# --- Interactive Menu ---
-
-show_menu() {
-    clear
-    echo "--------------------------------------------------"
-    echo "  Development Workstation Setup"
-    echo "--------------------------------------------------"
-    echo "Please select which categories to install:"
-    echo "  1) System Utilities"
-    echo "  2) CLI Development Tools"
-    echo "  3) Desktop Components"
-    echo "  4) GUI Applications"
-    echo "  5) Optional Software (Large/Heavy)"
-    echo "  A) Install ALL Categories (Excludes Optional)"
-    echo "  Q) Quit"
-    echo "--------------------------------------------------"
-    read -p "Enter your choice: " choice
-    echo ""
-
-    case "$choice" in
-        1) install_system ;;
-        2) install_dev_tools ;;
-        3) install_desktop ;;
-        4) install_apps ;;
-        5) install_optional ;;
-        [aA]) install_all ;;
-        [qQ]) exit 0 ;;
-        *) echo "Invalid choice, please try again." ;;
-    esac
-
-    echo -e "\nPress any key to return to the menu..."
-    read -n 1
-    show_menu
-}
-
 # --- CLI Argument Parsing ---
+
+# Allow menu.sh to source this file without triggering execution
+if [[ "${MENU_MODE:-}" == "true" ]]; then
+    return 0
+fi
 
 show_help() {
     echo "Usage: $0 [options]"
     echo ""
     echo "Options:"
-    echo "  --all           Install all standard categories (excludes optional)"
     echo "  --system        Install system utilities"
     echo "  --desktop       Install desktop components"
     echo "  --dev-tools     Install CLI development tools"
     echo "  --apps          Install GUI applications"
     echo "  --optional      Install optional/heavy software"
-    echo "  --list <cat>    List apps in a category (system, desktop, dev-tools, apps, optional)"
+    echo "  --list <cat>    List apps in a category"
     echo "  -h, --help      Show this help message"
     echo ""
-    echo "If no arguments are provided, an interactive menu will be displayed."
-    echo ""
-    echo "Examples:"
-    echo "  $0 --all                    # Install standard set"
-    echo "  $0 --list apps              # List GUI apps"
-    echo "  $0 --optional               # Install optional components"
-    echo "  $0                          # Interactive menu"
+    echo "If no arguments are provided, all standard categories are installed."
+    echo "For an interactive experience, run: ./bin/menu.sh"
 }
 
 # Parse command line arguments
 if [[ $# -eq 0 ]]; then
-    # No arguments - show interactive menu
-    show_menu
+    # No arguments - default to install all
+    install_all
 else
     # Parse arguments
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --all)
-                install_all
-                exit 0
-                ;;
             --system)
                 install_system
                 shift
@@ -152,7 +112,7 @@ else
                     list_category_apps "$2"
                     shift 2
                 else
-                     echo "Error: --list requires a category argument (system, desktop, dev-tools, apps, optional)"
+                     echo "Error: --list requires a category argument"
                      exit 1
                 fi
                 ;;

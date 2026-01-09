@@ -26,7 +26,13 @@ cd dev-ubuntu-setup
 ./install.sh
 ```
 
-The `install.sh` script will guide you through the installation process. You can choose to install everything at once or select specific categories of tools.
+The `install.sh` script defaults to a full installation of all standard categories. 
+
+For a more granular, interactive experience where you can pick specific categories, run:
+
+```bash
+./bin/menu.sh
+```
 
 ## Repository Structure
 
