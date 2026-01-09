@@ -1,38 +1,33 @@
 #!/bin/bash
-# Simple DX test: Simulate a new machine by mounting local code into a clean Ubuntu container.
+# Test the full "New Machine" Developer Experience (DX) by fetching from GitHub.
+# Uses a cached base image for speed.
 
 set -e
 
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# Colors
+BLUE='\033[0;34m'
+NC='\033[0m'
 
-# Use exactly what a user would type, but pointing to our local volume for the 'repo'
-# to test the changes we just made.
-docker run --rm \
-    -v "$PROJECT_ROOT":/src:ro \
-    -e REPO_URL=/src \
-    ubuntu:24.04 bash -c "
-        echo '==> 1. Initial Prep (User installs curl/sudo)'
-        apt-get update -qq && apt-get install -y curl sudo -qq
-        
-        echo '==> 2. Create testuser'
-        useradd -m -s /bin/bash testuser
-        echo 'testuser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-        
-        echo '==> 3. Run Bootstrapper as testuser'
-        # We must install git as root FIRST because our test script needs it for safe.directory
-        # before the installer even starts.
-        apt-get install -y git -qq
-        
-        sudo -u testuser REPO_URL=/src bash <<EOF
-            set -e
-            git config --global --add safe.directory /src
-            bash /src/install.sh --system
-EOF
-        
-        echo '==> 4. Verify Result as testuser'
-        sudo -u testuser bash <<EOF
-            set -e
-            cd ~/scripts/dev-ubuntu-setup
-            ./bin/verify.sh
-EOF
-    "
+print_step() {
+    echo -e "${BLUE}==>${NC} \033[1m${1}\033[0m"
+}
+
+# 1. Build/Use cached base image
+print_step "Ensuring base test image is ready..."
+docker build -t dev-setup-test-base -f tests/Dockerfile.test-base .
+
+# 2. Run the test
+# We use -i to keep it interactive so we see output in real-time
+print_step "Starting DX test in clean container..."
+docker run --rm dev-setup-test-base bash -c "
+    set -e
+    echo '==> [USER] Installing curl...'
+    sudo apt-get update -qq && sudo apt-get install -y curl -qq
+    
+    echo '==> [USER] Fetching and running the installer from GitHub...'
+    curl -fsSL https://raw.githubusercontent.com/plindman/dev-ubuntu-setup/main/install.sh | bash -s -- --all
+    
+    echo '==> [USER] Verifying final state...'
+    cd ~/scripts/dev-ubuntu-setup
+    ./bin/verify.sh
+"

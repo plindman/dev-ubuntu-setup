@@ -59,3 +59,53 @@ You can customize the installation by editing the `install.sh` script or by runn
 ## A Note on Script Execution
 
 All installation scripts in this repository are written and tested to be run with `bash`. While the setup will install and configure `zsh` as the default interactive shell for the user, the provisioning scripts themselves should always be executed with `bash` to ensure maximum portability and avoid issues with a partially configured `zsh` environment during setup.
+
+
+
+## Development & Testing
+
+
+
+This project includes a Docker-based test suite to simulate a "Fresh Machine" installation. This ensures the "Developer Experience" (DX) remains smooth and reliable.
+
+
+
+### Running Tests
+
+
+
+To run the end-to-end installation test:
+
+
+
+```bash
+
+./tests/test_dx.sh
+
+```
+
+
+
+### How it works:
+
+1.  **Base Image**: Builds a cached Docker image (`dev-setup-test-base`) with a clean Ubuntu environment and a non-root user with `sudo` access.
+
+2.  **Simulation**: Starts a container and runs the exact command a user would use: `curl | bash`.
+
+3.  **GitHub Source**: It fetches the bootstrapper directly from the GitHub `main` branch.
+
+4.  **Verification**: After installation, it runs `./bin/verify.sh` inside the container to confirm success.
+
+
+
+### Viewing Output
+
+The test output is printed directly to your terminal. Since it runs in a standard Docker container, you can redirect the output to a file if you need to inspect it later:
+
+
+
+```bash
+
+./tests/test_dx.sh > test_results.log 2>&1
+
+```
