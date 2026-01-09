@@ -24,6 +24,9 @@ WRITING_FONTS=(
 )
 
 install_writing_fonts() {
+    # Ensure fontconfig is installed for fc-list/fc-cache
+    install_and_show_versions fontconfig
+
     # 1. Install apt-based fonts
     print_info "Installing professional fonts via apt..."
     install_and_show_versions "${APT_FONTS[@]}"
