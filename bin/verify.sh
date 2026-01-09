@@ -9,7 +9,7 @@ set -e
 MY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Source module runner
-source "$MY_DIR/install/lib/module_runner.sh"
+source "$MY_DIR/../install/lib/module_runner.sh"
 
 # --- Verification Wrappers ---
 verify_all() {
