@@ -16,5 +16,5 @@ install_core() {
     sudo apt-get -qq upgrade -y > /dev/null
 
     # Install essential core packages
-    quiet_apt_install apt-transport-https ca-certificates gnupg lsb-release unzip software-properties-common
+    quiet_apt_install apt-transport-https ca-certificates gnupg lsb-release unzip software-properties-common fontconfig
 }
