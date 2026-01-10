@@ -1,27 +1,23 @@
 FROM ubuntu:24.04
 
-# Avoid prompts during installation
+# Build-time arguments with defaults
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install basic requirements for the bootstrapper and sudo
-RUN apt-get update && apt-get install -y \
-    curl \
-    git \
-    sudo \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -qq && \
+    apt-get install -y sudo curl git -qq && \
+    # Adjust the existing 'ubuntu' user to match the host UID/GID
+    # We use '|| true' because if the IDs are already 1000, these might exit with 0 or a warning
+    groupmod -g ${GROUP_ID} ubuntu || true && \
+    usermod -u ${USER_ID} -g ${GROUP_ID} ubuntu || true && \
+    rm -rf /var/lib/apt/lists/*
 
-# Setup a test user to simulate a real environment
-RUN useradd -m -s /bin/bash testuser && \
-    echo "testuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-USER testuser
-WORKDIR /home/testuser
+# Ensure the home directory is still owned by the (now updated) ubuntu user
+RUN chown -R ubuntu:ubuntu /home/ubuntu
 
-# Copy the current codebase into the container
-# This allows testing local changes without committing/pushing
-COPY --chown=testuser:testuser . /home/testuser/scripts/dev-ubuntu-setup
-
-WORKDIR /home/testuser/scripts/dev-ubuntu-setup
-
-# Default command is just to keep it alive or we can set it to the test script
-CMD ["/bin/bash"]
+USER ubuntu
+WORKDIR /home/ubuntu

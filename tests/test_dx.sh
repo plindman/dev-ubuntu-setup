@@ -13,22 +13,23 @@ print_step() {
 }
 
 # 1. Build/Use cached base image
-print_step "Ensuring base test image is ready..."
-docker build -t dev-setup-test-base -f tests/Dockerfile.test-base .
+print_step "Building base image aligned to your user ID ($(id -u))..."
+docker build \
+    --build-arg USER_ID=$(id -u) \
+    --build-arg GROUP_ID=$(id -g) \
+    -t dev-ubuntu-setup -f tests/Dockerfile .
 
 # 2. Run the test
-# Create a local logs directory and ensure it is writable
+# Create a local logs directory
 mkdir -p tests/logs
-chmod 777 tests/logs
 
 print_step "Starting DX test in clean container..."
-# We mount tests/logs to the container's log path
 docker run --rm \
-    -v "$(pwd)/tests/logs:/home/testuser/.local/state/dev-ubuntu-setup" \
-    dev-setup-test-base bash -c "
+    -v "$(pwd)/tests/logs:/home/ubuntu/.local/state/dev-ubuntu-setup" \
+    dev-ubuntu-setup bash -c "
     set -e
-    echo '==> [USER] Fetching and running the installer from GitHub...'
-    # We run without flags to test the 'Install All' default behavior
-    # Verification is now built into this command
+    echo '==> I am: \$(whoami) (ID: \$(id -u))'
+    echo '==> Fetching and running the installer...'
     curl -fsSL https://raw.githubusercontent.com/plindman/dev-ubuntu-setup/main/install.sh | bash
 "
+print_step "DX test completed. Check logs in tests/logs/ for details."
