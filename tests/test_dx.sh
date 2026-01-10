@@ -1,35 +1,46 @@
 #!/bin/bash
-# Test the full "New Machine" Developer Experience (DX) by fetching from GitHub.
+# Test the full "New Machine" Developer Experience (DX) using the local project.
 # Uses a cached base image for speed.
 
 set -e
 
-# Colors
-BLUE='\033[0;34m'
-NC='\033[0m'
+# 1. Identify locations
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+LOG_DIR="$SCRIPT_DIR/logs"
 
-print_step() {
-    echo -e "${BLUE}==>${NC} \033[1m${1}\033[0m"
-}
+# 2. Variables
+CONTAINER_NAME="dev-ubuntu-setup"
+CONTAINER_USER="ubuntu"  # Change this once, and everything updates
+CONTAINER_HOME="/home/$CONTAINER_USER"
+CONTAINER_SRC="$CONTAINER_HOME/$CONTAINER_NAME"
+CONTAINER_LOGS="$CONTAINER_HOME/.local/state/$CONTAINER_NAME"
 
-# 1. Build/Use cached base image
-print_step "Building base image aligned to your user ID ($(id -u))..."
+# 3. Preparation
+# Ensure the host logs folder exists for mounting
+mkdir -p "$LOG_DIR"
+
+# 4. Build the base image
+# Pass host UID/GID so the container user matches your host user
 docker build \
     --build-arg USER_ID=$(id -u) \
     --build-arg GROUP_ID=$(id -g) \
-    -t dev-ubuntu-setup -f tests/Dockerfile .
+    --build-arg USERNAME="$CONTAINER_USER" \
+    -t "$CONTAINER_NAME" \
+    -f "$SCRIPT_DIR/Dockerfile" \
+    "$PROJECT_ROOT"
 
-# 2. Run the test
-# Create a local logs directory
-mkdir -p tests/logs
-
-print_step "Starting DX test in clean container..."
+# 5. Run the test
 docker run --rm \
-    -v "$(pwd)/tests/logs:/home/ubuntu/.local/state/dev-ubuntu-setup" \
-    dev-ubuntu-setup bash -c "
+    --name "$CONTAINER_NAME" \
+    -v "$PROJECT_ROOT:$CONTAINER_SRC" \
+    -v "$LOG_DIR:$CONTAINER_LOGS" \
+    "$CONTAINER_NAME" bash -c "
     set -e
-    echo '==> I am: \$(whoami) (ID: \$(id -u))'
-    echo '==> Fetching and running the installer...'
-    curl -fsSL https://raw.githubusercontent.com/plindman/dev-ubuntu-setup/main/install.sh | bash
+    echo \"==> [INFO] Running as: \$(whoami) (ID: \$(id -u))\"
+    cd \"$CONTAINER_SRC\"
+    bash install.sh
 "
-print_step "DX test completed. Check logs in tests/logs/ for details."
+
+# 6. Completion message
+echo "==> [INFO] DX test completed. Check logs in tests/logs/ for details."
