@@ -3,9 +3,14 @@
 # Module Runner Logic
 # Handles dynamic discovery and execution of installer modules.
 
-# Load helpers (explicit dependencies)
+# Load helpers (foundational output first, then others)
 source "$(dirname "${BASH_SOURCE[0]}")/output.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
+for lib in "$(dirname "${BASH_SOURCE[0]}")"/*.sh; do
+    # Skip output.sh since it's already sourced, and skip this file
+    if [[ "$lib" != *"output.sh" ]] && [[ "$lib" != *"module_runner.sh" ]]; then
+        source "$lib"
+    fi
+done
 
 # Internal helper to verify if app is installed
 _verify_app_status() {
