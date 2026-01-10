@@ -30,22 +30,8 @@ install_writing_fonts() {
     print_info "Installing professional fonts via apt..."
     quiet_apt_install "${APT_FONTS[@]}"
 
-    # 2. Install manual fonts
-    local needs_refresh=false
-
-    for font_entry in "${WRITING_FONTS[@]}"; do
-        local font_name="${font_entry%%|*}"
-        local font_url="${font_entry#*|}"
-        
-        if font_zip_install "$font_name" "$font_url"; then
-            needs_refresh=true
-        fi
-    done
-
-    if [ "$needs_refresh" = true ]; then
-        print_info "Refreshing font cache..."
-        fc-cache -f > /dev/null
-    fi
+    # 2. Install manual fonts using utility
+    quiet_font_install "${WRITING_FONTS[@]}"
 }
 
 verify_writing_fonts() {

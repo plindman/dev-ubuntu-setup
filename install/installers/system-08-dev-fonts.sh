@@ -5,28 +5,24 @@
 # This corresponds to the "System" -> "Fonts" category.
 
 APP_NAME="Nerd Fonts (FiraCode, JetBrainsMono)"
-FONTS=("FiraCode" "JetBrainsMono")
+
+# Define fonts: "Name|URL"
+NERD_FONTS=(
+    "FiraCode|https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip"
+    "JetBrainsMono|https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip"
+)
+
+# Convenience list for verification
+FONT_NAMES=("FiraCode" "JetBrainsMono")
 
 install_fonts() {
-    local base_url="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1"
-    local needs_refresh=false
-
-    for font in "${FONTS[@]}"; do
-        if font_zip_install "$font" "$base_url/$font.zip"; then
-            needs_refresh=true
-        fi
-    done
-
-    if [ "$needs_refresh" = true ]; then
-        print_info "Refreshing font cache..."
-        fc-cache -f > /dev/null
-    fi
+    quiet_font_install "${NERD_FONTS[@]}"
 }
 
 verify_fonts() {
-    fonts_installed "${FONTS[@]}"
+    fonts_installed "${FONT_NAMES[@]}"
 }
 
 verify_details_fonts() {
-    print_missing_fonts "${FONTS[@]}"
+    print_missing_fonts "${FONT_NAMES[@]}"
 }
