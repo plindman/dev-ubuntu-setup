@@ -31,7 +31,7 @@ cleanup() {
         echo -e "\033[1;31m==>\033[0m \033[1mCheck the log for details: $LOG_FILE\033[0m"
     fi
 }
-trap cleanup EXIT
+trap cleanup EXIT SIGINT SIGTERM
 
 print_step() {
     echo -e "\033[1;34m==>\033[0m \033[1m$1\033[0m"
