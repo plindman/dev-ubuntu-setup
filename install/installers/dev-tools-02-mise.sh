@@ -7,7 +7,7 @@ APP_NAME="mise"
 
 install_mise() {
     print_info "Installing mise..."
-    curl https://mise.run | sh
+    curl -fsSL https://mise.run | sh > /dev/null 2>&1
 
     # Ensure ~/.local/bin is in PATH for the current session
     if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
