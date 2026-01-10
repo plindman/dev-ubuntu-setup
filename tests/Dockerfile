@@ -14,6 +14,9 @@ RUN apt-get update -qq && \
     usermod -u ${USER_ID} -g ${GROUP_ID} ubuntu || true && \
     rm -rf /var/lib/apt/lists/*
 
+RUN mkdir -p /home/ubuntu/.local/state/dev-ubuntu-setup && \
+    chown -R ubuntu:ubuntu /home/ubuntu/.local
+
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Ensure the home directory is still owned by the (now updated) ubuntu user
