@@ -18,15 +18,20 @@ install_core() {
     # Install apt-utils first to avoid debconf warnings
     quiet_apt_update && quiet_apt_install apt-utils
 
-    # Upgrade system packages
     print_color "$GREEN" "Disabling Ubuntu Pro promotional messages..."
+    export TERM=linux
     export DEBIAN_FRONTEND=noninteractive
     export DEBCONF_NONINTERACTIVE_SEEN=true
 
+    # Run the loop with explicitly passed variables
     for service in esm-apps esm-infra livepatch uc; do
-        sudo -E pro disable "$service" >/dev/null 2>&1 </dev/null || true
-    done
+        # Passing variables directly to sudo prevents environment stripping
+        sudo DEBIAN_FRONTEND=noninteractive \
+            DEBCONF_NONINTERACTIVE_SEEN=true \
+            pro disable "$service" >/dev/null 2>&1 </dev/null || true
+    done    
 
+    # Upgrade system packages
     sudo apt-get -qq upgrade -y > /dev/null
 
     # Install essential core packages
