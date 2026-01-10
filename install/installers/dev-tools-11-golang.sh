@@ -20,7 +20,7 @@ install_golang() {
     fi
 
     # Install Go
-    mise use --global go@latest
+    mise use --global go@latest --quiet
 }
 
 verify_golang() {

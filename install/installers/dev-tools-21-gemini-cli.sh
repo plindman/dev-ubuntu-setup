@@ -10,7 +10,7 @@ APP_COMMAND="gemini"
 install_gemini() {
     # Install Gemini CLI via npm
     # This assumes Node.js and npm are already installed (handled by nodejs.sh).
-    npm install -g @google/gemini-cli --silent
+    npm install -g @google/gemini-cli --silent > /dev/null 2>&1
 }
 
 # Source shared installation helper

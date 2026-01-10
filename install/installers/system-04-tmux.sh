@@ -21,10 +21,10 @@ install_tmux() {
     fi
 
     if [ ! -d "$OHMYTMUX_INSTALL" ]; then
-        git clone --single-branch https://github.com/gpakosz/.tmux.git "$OHMYTMUX_INSTALL"
+        git clone -q --single-branch https://github.com/gpakosz/.tmux.git "$OHMYTMUX_INSTALL"
     else
         if [ -d "$OHMYTMUX_INSTALL/.git" ]; then
-            (cd "$OHMYTMUX_INSTALL" && git pull)
+            (cd "$OHMYTMUX_INSTALL" && git pull -q)
         fi
     fi
 

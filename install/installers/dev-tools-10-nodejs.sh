@@ -20,7 +20,7 @@ install_nodejs() {
     fi
 
     # Install Node.js
-    mise use --global node@lts
+    mise use --global node@lts --quiet
 }
 
 verify_nodejs() {
