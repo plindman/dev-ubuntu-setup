@@ -10,7 +10,8 @@ APP_COMMAND="claude"
 install_claude() {
     # Install Claude Code via its official script
     # https://code.claude.com/docs/en/setup
-    curl -fsSL https://claude.ai/install.sh | bash > /dev/null 2>&1
+    # We don't silence this yet to debug potential hangs
+    curl -fsSL https://claude.ai/install.sh | bash
 }
 
 # Source shared installation helper
