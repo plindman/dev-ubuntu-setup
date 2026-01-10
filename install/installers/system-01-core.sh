@@ -8,10 +8,10 @@ install_core() {
 
     # Upgrade system packages
     print_color "$GREEN" "Disabling Ubuntu Pro promotional messages..."
-    sudo pro disable esm-apps > /dev/null 2>&1 || true
-    sudo pro disable esm-infra > /dev/null 2>&1 || true
-    sudo pro disable livepatch > /dev/null 2>&1 || true
-    sudo pro disable uc > /dev/null 2>&1 || true
+    sudo DEBIAN_FRONTEND=noninteractive pro disable esm-apps > /dev/null 2>&1 || true
+    sudo DEBIAN_FRONTEND=noninteractive pro disable esm-infra > /dev/null 2>&1 || true
+    sudo DEBIAN_FRONTEND=noninteractive pro disable livepatch > /dev/null 2>&1 || true
+    sudo DEBIAN_FRONTEND=noninteractive pro disable uc > /dev/null 2>&1 || true
 
     sudo apt-get -qq upgrade -y > /dev/null
 
