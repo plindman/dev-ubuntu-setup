@@ -32,8 +32,17 @@ print_missing_fonts() {
 print_font_versions() {
     print_color "$GREEN" "Manual Font Versions:"
     for font in "$@"; do
-        # Try to extract version using fc-list. 
-        local version=$(fc-list :family="$font" version | head -n 1 | awk -F= '{print $2}')
+        # Extract version metadata. We check 'version', 'fontversion' and 'fullname'.
+        local raw_info=$(fc-list :family="$font" version fontversion fullname 2>/dev/null)
+        
+        # Look for numeric patterns (e.g., 1.2.3, 4.0, or raw integers)
+        local version=$(echo "$raw_info" | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | head -n 1)
+        
+        if [ -z "$version" ]; then
+            # Fallback: check for raw integer fontversion (matches 'fontversion: 123' or 'fontversion=123')
+            version=$(echo "$raw_info" | grep -oE 'fontversion[:=][ ]*[0-9]+' | grep -oE '[0-9]+' | head -n 1)
+        fi
+
         if [ -n "$version" ]; then
             echo "  $font: $version"
         else
