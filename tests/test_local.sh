@@ -1,56 +1,39 @@
 #!/bin/bash
 # Test the full "New Machine" Developer Experience (DX) using the local project.
-# Uses a cached base image for speed.
 
 set -e
 
 # 1. Identify locations
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_DIR_NAME=$(basename "$SCRIPT_DIR")
-
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 LOG_DIR="$SCRIPT_DIR/logs"
 
-# 2. Variables
-CONTAINER_NAME="dev-ubuntu-setup"
-CONTAINER_USER="ubuntu"  # Change this once, and everything updates
-CONTAINER_HOME="/home/$CONTAINER_USER"
-CONTAINER_SRC="$CONTAINER_HOME/$CONTAINER_NAME"
-CONTAINER_LOGS="$CONTAINER_HOME/.local/state/$CONTAINER_NAME"
+# 2. Load Configuration and Utilities
+source "$SCRIPT_DIR/lib/config.sh"
+source "$SCRIPT_DIR/lib/docker_utils.sh"
 
-# Cleanup function
-cleanup() {
-    echo ""
-    echo "==> [INFO] Cleaning up..."
-    docker rm -f "$CONTAINER_NAME" >/dev/null 2>&1 || true
-}
-trap cleanup EXIT SIGINT SIGTERM
+CONTAINER_NAME="${CONTAINER_NAME_BASE}-local"
 
-# 3. Preparation
-# Ensure the host logs folder exists for mounting
-mkdir -p "$LOG_DIR"
+# 3. Build Image
+ensure_test_image "$SCRIPT_DIR" "$CONTAINER_IMAGE" "$CONTAINER_USER"
 
-# 4. Build the base image
-# Pass host UID/GID so the container user matches your host user
-docker build \
-    --build-arg USER_ID=$(id -u) \
-    --build-arg GROUP_ID=$(id -g) \
-    --build-arg USERNAME="$CONTAINER_USER" \
-    -t "$CONTAINER_NAME" \
-    - < "$SCRIPT_DIR/Dockerfile"
-
-# 5. Run the test
-docker run --rm \
-    --name "$CONTAINER_NAME" \
-    -v "$PROJECT_ROOT:$CONTAINER_SRC" \
-    -v "$LOG_DIR:$CONTAINER_LOGS" \
-    "$CONTAINER_NAME" bash -c "
+# 4. Run Test
+echo "==> Starting DX test..."
+# Signature: NAME IMAGE SRC_CONT LOG_CONT SRC_HOST LOG_HOST CMD
+run_test_container \
+    "$CONTAINER_NAME" \
+    "$CONTAINER_IMAGE" \
+    "$CONTAINER_SRC" \
+    "$CONTAINER_LOGS" \
+    "$PROJECT_ROOT" \
+    "$LOG_DIR" \
+    "\
     set -e
-    echo \"==> [INFO] Running as: \$(whoami) (ID: \$(id -u))\"
+    echo \"==> [INFO] Running as: $(whoami) (ID: $(id -u))\"
     cd \"$CONTAINER_SRC\"
     echo \"==> [INFO] Running local install.sh (simulating clone from github)\"
     bash \"$CONTAINER_SRC/$SCRIPT_DIR_NAME/local_install.sh\"
-"
+    "
 
-# 6. Completion message
 echo "==> [INFO] DX test completed. Check logs in tests/logs/ for details."
