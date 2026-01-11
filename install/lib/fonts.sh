@@ -32,21 +32,23 @@ print_missing_fonts() {
 print_font_versions() {
     print_color "$GREEN" "Manual Font Versions:"
     for font in "$@"; do
-        # Extract version metadata. We check 'version', 'fontversion' and 'fullname'.
-        local raw_info=$(fc-list :family="$font" version fontversion fullname 2>/dev/null)
-        
-        # Look for numeric patterns (e.g., 1.2.3, 4.0, or raw integers)
-        local version=$(echo "$raw_info" | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | head -n 1)
+        # Try exact family name first, then with "Nerd Font" suffix
+        local version=$(fc-list ":family=$font" fontversion 2>/dev/null | head -n 1 | sed "s/^.*version=//;s/[: ]//g")
         
         if [ -z "$version" ]; then
-            # Fallback: check for raw integer fontversion (matches 'fontversion: 123' or 'fontversion=123')
-            version=$(echo "$raw_info" | grep -oE 'fontversion[:=][ ]*[0-9]+' | grep -oE '[0-9]+' | head -n 1)
+            version=$(fc-list ":family=$font Nerd Font" fontversion 2>/dev/null | head -n 1 | sed "s/^.*version=//;s/[: ]//g")
         fi
 
         if [ -n "$version" ]; then
             echo "  $font: $version"
         else
-            echo "  $font: (Installed)"
+            # Last ditch attempt: check for any version string if fontversion integer is missing
+            version=$(fc-list ":family=$font" version 2>/dev/null | head -n 1 | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?')
+            if [ -n "$version" ]; then
+                echo "  $font: $version"
+            else
+                echo "  $font: (Installed)"
+            fi
         fi
     done
 }
