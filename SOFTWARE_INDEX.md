@@ -82,6 +82,10 @@ These packages and configurations are specific to a graphical desktop environmen
 *   **nemo**: Installs the Nemo file manager.
 *   **synaptic**: A graphical package manager for `apt`.
 
+### Fonts
+*   **Dev Fonts (Nerd Fonts)**: Optimized for development with icons. Includes **FiraCode** and **JetBrainsMono**.
+*   **Writing Fonts**: Professional typography for documentation and reading. Includes **Inter**, **EB Garamond**, **Libertinus**, and various system-wide fonts like **IBM Plex**, **Noto**, and **TeX Gyre**.
+
 ---
 
 ## Applications (GUI)
