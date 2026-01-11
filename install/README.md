@@ -24,6 +24,7 @@ Core foundational utilities.
 - `system-01-core.sh`: Essential packages (unzip, fontconfig).
 - `system-08-dev-fonts.sh`: Nerd Fonts (FiraCode, JetBrainsMono).
 - `system-09-writing-fonts.sh`: Professional typography (Inter, Libertinus, etc.).
+- `system-10-texlive.sh`: Full TeX distribution.
 
 ### Development Tools (`dev-tools-*.sh`)
 CLI tools for software development.
@@ -35,6 +36,7 @@ User-facing GUI applications.
 - `apps-01-chrome.sh`: Google Chrome.
 - `apps-04-vscode.sh`: VS Code.
 - `apps-05-ghostty.sh`: Ghostty Terminal.
+- `apps-09-texstudio.sh`: TeXstudio IDE.
 
 ## Development & Testing
 Refer to [tests/README.md](../tests/README.md) for details on how to test these scripts.

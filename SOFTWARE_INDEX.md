@@ -85,6 +85,7 @@ These packages and configurations are specific to a graphical desktop environmen
 ### Fonts
 *   **Dev Fonts (Nerd Fonts)**: Optimized for development with icons. Includes **FiraCode** and **JetBrainsMono**.
 *   **Writing Fonts**: Professional typography for documentation and reading. Includes **Inter**, **EB Garamond**, **Libertinus**, and various system-wide fonts like **IBM Plex**, **Noto**, and **TeX Gyre**.
+*   **TexLive (Full)**: A comprehensive TeX system for professional typesetting and document preparation.
 
 ---
 
@@ -101,15 +102,7 @@ This category includes all user-facing graphical applications, for both general 
 *   **VS Code**: A popular and highly extensible source-code editor.
 *   **Zed Editor**: A high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.
 *   **Kate**: A powerful text editor with advanced features like syntax highlighting and a built-in terminal.
+*   **TeXstudio**: A feature-rich LaTeX editor with integrated PDF viewer and advanced syntax highlighting.
 *   **Google Antigravity**: An AI-first IDE for agentic development.
 *   **Ghostty**: A GPU-accelerated terminal emulator.
-
----
-
-## Optional Software
-
-Heavy or specialized software that is not installed by default.
-
-*   **TexLive (Full)**: A comprehensive TeX system with all available packages and fonts (~5GB).
-*   **TeXstudio**: A feature-rich LaTeX editor with integrated PDF viewer and advanced syntax highlighting.
 
