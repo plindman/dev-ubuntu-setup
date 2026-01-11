@@ -25,8 +25,12 @@ quiet_apt_install() {
     fi
 }
 
-# Helper to add a third-party APT repository quietly.
-# Usage: add_apt_repo "name" "gpg_url" "repo_url"
+# Print versions of a list of apt packages.
+# Usage: print_apt_package_versions "pkg1" "pkg2"
+print_apt_package_versions() {
+    local packages=("$@")
+    dpkg-query -W -f='  ${Package}: ${Version}\n' "${packages[@]}" 2>/dev/null || true
+}
 add_apt_repo() {
     local name="$1"
     local gpg_url="$2"
