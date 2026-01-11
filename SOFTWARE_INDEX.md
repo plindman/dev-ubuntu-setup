@@ -46,6 +46,7 @@ These are essential command-line tools and utilities specifically tailored for s
 ### Tools
 *   **build-essential**: Provides low-level compilers (like C/C++) that act as a foundational "safety net," as they are often a hidden dependency for installing other development tools and libraries from source.
 *   **ripgrep**: A line-oriented search tool that recursively searches your current directory for a regex pattern. It's a faster alternative to `grep` for code.
+*   **Task**: A task runner / build tool that aims to be simpler and easier to use than GNU Make.
 
 ### Git
 *   **git-all**: The version control system for managing code.

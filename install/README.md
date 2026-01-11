@@ -29,6 +29,7 @@ Core foundational utilities.
 ### Development Tools (`dev-tools-*.sh`)
 CLI tools for software development.
 - `dev-tools-01-tools.sh`: build-essential, ripgrep.
+- `dev-tools-05-task.sh`: Task runner.
 - `dev-tools-10-nodejs.sh`: Node.js and npm.
 
 ### Applications (`apps-*.sh`)
