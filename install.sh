@@ -1,6 +1,5 @@
 #!/bin/bash
-# Bootstrapper script for dev-ubuntu-setup
-# curl -fsSL https://raw.githubusercontent.com/plindman/dev-ubuntu-setup/main/install.sh | bash
+# install.sh - Refactored with separate functions
 
 set -e
 
@@ -16,10 +15,8 @@ LOG_DIR="$HOME/.local/state/dev-ubuntu-setup"
 mkdir -p "$LOG_DIR"
 LOG_FILE="$LOG_DIR/install.log"
 
-# Redirect all output to log file while still showing in terminal (overwrite each run)
 exec > >(tee "$LOG_FILE") 2>&1
 
-# Ensure cleanup on exit if successful
 cleanup() {
     local exit_code=$?
     if [ $exit_code -eq 0 ]; then
@@ -50,20 +47,38 @@ install_package() {
     fi
 }
 
-# 1. Prepare environment
-install_package "git"
+# Worker functions
+prepare_environment() {
+    install_package "git"
+}
 
-# 2. Clone repository
-print_step "Cloning repository to $TARGET_DIR..."
-git clone -q "$REPO_URL" "$TARGET_DIR"
-cd "$TARGET_DIR"
+clone_repository() {
+    print_step "Cloning repository to $TARGET_DIR..."
+    git clone -q "$REPO_URL" "$TARGET_DIR"
+    cd "$TARGET_DIR"
+}
 
-# 3. Execute installation
-print_step "Launching installer..."
-chmod +x bin/install.sh
-./bin/install.sh "$@"
+execute_installation() {
+    print_step "Launching installer..."
+    chmod +x bin/install.sh
+    ./bin/install.sh "$@"
+}
 
-# 4. Verify installation
-print_step "Verifying installation..."
-chmod +x bin/verify.sh
-./bin/verify.sh
+verify_installation() {
+    print_step "Verifying installation..."
+    chmod +x bin/verify.sh
+    ./bin/verify.sh
+}
+
+# Main run function
+run() {
+    prepare_environment
+    clone_repository
+    execute_installation "$@"
+    verify_installation
+}
+
+# Execute if not sourced
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    run "$@"
+fi
