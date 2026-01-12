@@ -12,6 +12,7 @@ CORE_PACKAGES=(
     "software-properties-common"
     "fontconfig"
     "apt-utils"
+    "age"
 )
 
 install_core() {
