@@ -22,9 +22,13 @@ Scripts are named using the convention `<category>-<number>-<name>.sh`.
 ### System (`system-*.sh`)
 Core foundational utilities.
 - `system-01-core.sh`: Essential packages (unzip, fontconfig).
-- `system-08-dev-fonts.sh`: Nerd Fonts (FiraCode, JetBrainsMono).
-- `system-09-writing-fonts.sh`: Professional typography (Inter, Libertinus, etc.).
-- `system-10-texlive.sh`: Full TeX distribution.
+- `system-02-networking-tools.sh`: curl, wget.
+- `system-03-console-fonts.sh`: Nerd Fonts (FiraCode, JetBrainsMono) for terminal/editors.
+- `system-04-zsh.sh`: zsh and Oh My Zsh.
+- `system-05-tmux.sh`: tmux and Oh My Tmux.
+- `system-06-services.sh`: openssh-server.
+- `system-07-system-tools.sh`: htop, keychain.
+- `system-08-editors.sh`: nano, micro, neovim.
 
 ### Development Tools (`dev-tools-*.sh`)
 CLI tools for software development.
