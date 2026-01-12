@@ -17,5 +17,6 @@ Several scripts download and execute code directly via pipe-to-shell, which is a
 - `install/dev-tools/bun.sh:21` - Bun installation
 - `install/dev-tools/uv.sh:21` - uv installation
 - `install/dev-tools/claude-code.sh:20` - Claude Code installation
+- `install/installers/system-09-chezmoi.sh` - chezmoi installation
 
 **Note:** While these downloads are from official sources, implementing proper download verification would improve security posture.

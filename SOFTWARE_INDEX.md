@@ -23,6 +23,7 @@ These are core operating system utilities and essential command-line tools that 
 *   **Oh My Zsh**: A framework for easily managing Zsh configuration, themes, and plugins. (Note: Many themes require a Nerd Font like Font Awesome to be installed in the desktop environment for icons to render correctly).
 *   **tmux**: A terminal multiplexer for managing multiple terminal sessions.
 *   **Oh My Tmux**: A configuration framework for `tmux`.
+*   **chezmoi**: A multi-platform dotfile manager that allows you to manage your personal configuration files across multiple machines.
 
 ### Editors
 *   **nano**: A simple, user-friendly command-line text editor for quick and straightforward edits.
