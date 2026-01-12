@@ -44,3 +44,17 @@ print_warning() {
 print_error() {
     print_color "$RED" "ERROR: $1" >&2
 }
+
+# Setup logging
+# Usage: setup_logging "log_name"
+setup_logging() {
+    local log_name="${1:-install}"
+    local log_dir="$HOME/.local/state/dev-ubuntu-setup"
+    mkdir -p "$log_dir"
+    local log_file="$log_dir/${log_name}.log"
+
+    # Redirect stdout and stderr to both terminal and log file
+    exec > >(tee -a "$log_file") 2>&1
+    
+    print_info "Logging to: $log_file"
+}
