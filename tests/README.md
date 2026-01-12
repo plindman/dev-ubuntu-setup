@@ -2,39 +2,45 @@
 
 This directory contains scripts to verify the installation process in various environments.
 
-## Integration Tests (Docker)
+## Directory Structure
 
-These tests use Docker to simulate a fresh Ubuntu installation.
+- **`host/`**: Tests that run directly on your machine.
+  - **`unit/`**: Fast logic-only tests without external dependencies.
+  - **`test_fonts_local.sh`**: Verifies the actual font state on your host machine.
+- **`container/`**: Tests that utilize Docker for isolation.
+  - **`category/`**: Integration tests for specific installer categories.
+  - **`commands/`**: Shell command templates passed to Docker.
+  - **`scripts/`**: Static scripts (like `install_from_source.sh`) executed within the container.
+- **`lib/`**: Shared host-side framework logic.
 
-### 1. Full Installation Simulation
-Simulates a fresh `git clone` and install using your *current local code* (mounted into the container). This is the primary test for developers working on the repo.
+## Usage
+
+### Docker Integration Tests
+These tests simulate a fresh Ubuntu installation.
+
+#### Full Installation Simulation
 ```bash
-./tests/test_local.sh
+./tests/container/test_full.sh
 ```
 
-### 2. Font Integration Test
-Specifically tests the font installation module (downloading, unzipping, `fc-cache`, and version checks) in a clean container.
+#### Category Tests
 ```bash
-./tests/test_fonts_docker.sh
+./tests/container/category/test_apps.sh
 ```
 
-## Local Machine Tests
+### Local Machine & Unit Tests
 
-### 1. Local Font Verification
-Checks if the fonts expected by this repository are correctly installed and registered on your *actual* machine. This uses the project's internal library logic to report versions.
+#### Local Font Verification
 ```bash
-./tests/test_fonts_local.sh
+./tests/host/test_fonts_local.sh
 ```
 
-## Unit Tests
-
-### 1. Font Logic Unit Test
-Tests the parsing logic, suffix resolution, and fixed-point version conversion without any external dependencies or font installations.
+#### Unit Tests
 ```bash
-./tests/unittests/test_fonts.sh
+./tests/host/unit/test_fonts.sh
 ```
 
 ## Architecture
-- **Base Image**: The `Dockerfile` in this directory builds a cached image with a clean Ubuntu environment and a non-root user with `sudo` access.
-- **Simulation**: `docker_utils.sh` handles container lifecycle.
-- **Local Install**: `local_install.sh` is used inside the container to simulate the setup process using the mounted source code instead of cloning from GitHub.
+- **Base Image**: The `Dockerfile` in this directory builds a cached image with a clean Ubuntu environment.
+- **Simulation**: `lib/docker_utils.sh` handles container lifecycle and command execution.
+- **Internal Commands**: Files in `container/commands/` are passed as text to Docker containers.

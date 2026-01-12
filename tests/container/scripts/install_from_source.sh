@@ -3,18 +3,18 @@
 
 set -e
 
-# Auto-discover project root relative to this script (assumed to be in tests/)
+# Auto-discover project root relative to this script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEV_SOURCE="$(dirname "$SCRIPT_DIR")"
+PROJECT_ROOT="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")"
 
 # Source the root install.sh to get all functions
-source "$DEV_SOURCE/install.sh"
+source "$PROJECT_ROOT/install.sh"
 
 copy_local_repository() {
     print_step "Copying local repository to $TARGET_DIR..."
-    # We copy the content of DEV_SOURCE (the mounted repo) to TARGET_DIR (the temp dir)
+    # We copy the content of PROJECT_ROOT (the mounted repo) to TARGET_DIR (the temp dir)
     # We use -a to preserve permissions/mode
-    cp -a "$DEV_SOURCE/." "$TARGET_DIR/"
+    cp -a "$PROJECT_ROOT/." "$TARGET_DIR/"
     cd "$TARGET_DIR"
 }
 

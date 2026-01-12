@@ -3,12 +3,10 @@
 
 set -e
 
-# Identify locations
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+# Initialize Test Environment
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")"; while [ ! -f lib/config.sh ] && [ "$PWD" != "/" ]; do cd ..; done; pwd)/lib/config.sh"
 
 # Load library
-
 source "$PROJECT_ROOT/install/lib/module_runner.sh"
 
 

@@ -8,9 +8,10 @@ print_color() { echo "$2"; }
 GREEN=""
 
 # 2. Source the library under test
-source install/lib/output.sh
-source install/lib/apt.sh
-source install/lib/fonts.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")"; while [ ! -f lib/config.sh ] && [ "$PWD" != "/" ]; do cd ..; done; pwd)/lib/config.sh"
+source "$PROJECT_ROOT/install/lib/output.sh"
+source "$PROJECT_ROOT/install/lib/apt.sh"
+source "$PROJECT_ROOT/install/lib/fonts.sh"
 
 # Mock dpkg-query
 dpkg-query() {

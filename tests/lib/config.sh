@@ -9,7 +9,7 @@ export APP_NAME="dev-ubuntu-setup"
 export TESTS_LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export TESTS_ROOT="$(dirname "$TESTS_LIB_DIR")"
 export TESTS_LOG_DIR="$TESTS_ROOT/logs"
-export TESTS_COMMANDS_DIR="$TESTS_ROOT/commands"
+export TESTS_COMMANDS_DIR="$TESTS_ROOT/container/commands"
 
 # --- Host Locations (Project) ---
 # The root of the repository, mounted into the container to test local code
