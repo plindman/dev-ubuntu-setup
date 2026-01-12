@@ -15,10 +15,15 @@ This directory contains scripts to verify the installation process in various en
 
 ## Usage
 
-### Docker Integration Tests
-These tests simulate a fresh Ubuntu installation.
+### Interactive Menu (Recommended)
+The easiest way to discover and run tests is via the interactive menu:
+```bash
+./tests/menu.sh
+```
 
-#### Full Installation Simulation
+### Manual Execution
+#### Docker Integration Tests
+
 ```bash
 ./tests/container/test_full.sh
 ```
