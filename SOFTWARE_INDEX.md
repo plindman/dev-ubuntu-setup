@@ -65,6 +65,7 @@ These are essential command-line tools and utilities specifically tailored for s
 ### AI & LLM Tools
 *   **Gemini CLI**: A command-line interface for interacting with Google's Gemini models.
 *   **Claude Code**: A command-line tool for interacting with Anthropic's Claude models.
+*   **OpenCode**: An AI-first development environment that indexes your codebase and provides intelligent code assistance via CLI, TUI, or desktop interface.
 
 ### Services
 *   **Docker Engine & CLI**: A containerization platform to build and run applications.
