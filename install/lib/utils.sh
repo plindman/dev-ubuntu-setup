@@ -22,3 +22,4 @@ is_root() {
 package_installed() {
     dpkg -l "$1" &> /dev/null
 }
+

@@ -1,6 +1,7 @@
 #!/bin/bash
 APP_NAME="Core System Utilities"
-APP_COMMAND=("unzip" "gpg" "lsb_release")
+# APP_COMMAND not relevant given we have the verify fucntions. it is either or.
+# APP_COMMAND=("unzip" "gpg" "lsb_release" "shellcheck")
 
 # Convenience list for verification
 CORE_PACKAGES=(
@@ -13,6 +14,7 @@ CORE_PACKAGES=(
     "fontconfig"
     "apt-utils"
     "age"
+    "shellcheck"
 )
 
 install_core() {

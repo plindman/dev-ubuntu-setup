@@ -8,8 +8,10 @@ APP_COMMAND="ghostty"
 
 install_ghostty() {
     # Install Ghostty via official installer script
-    # We quiet it to keep logs clean
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)" > /dev/null 2>&1
+    local script
+    script=$(download_and_validate_script "https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh") || return 1
+    bash "$script" > /dev/null 2>&1
+    rm -f "$script"
 }
 
 # Source shared installation helper

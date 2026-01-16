@@ -15,6 +15,7 @@ These are core operating system utilities and essential command-line tools that 
 *   **gnupg**: Provides cryptographic services and verification for package signatures.
 *   **lsb-release**: Identifies the Linux distribution version, a requirement for many scripts and PPA additions.
 *   **age**: A modern, simple, and secure encryption tool. Often used with chezmoi for managing secret dotfiles.
+*   **ShellCheck**: A shell script static analysis tool that provides warnings and suggestions for bash/sh scripts. Used to validate piped install scripts before execution for improved security.
 
 ### System Services
 *   **openssh-server**: A fundamental service to allow remote access to the machine.

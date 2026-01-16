@@ -6,6 +6,7 @@
 # Load core libraries in order
 LIBS=(
     "output.sh"
+    "security.sh"
     "utils.sh"
     "apt.sh"
     "fonts.sh"

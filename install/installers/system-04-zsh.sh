@@ -24,7 +24,10 @@ install_zsh() {
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
         # Run with --unattended to prevent it from changing the shell or starting zsh
         # --keep-zshrc ensures it doesn't overwrite a .zshrc if one exists
-        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc > /dev/null 2>&1
+        local script
+        script=$(download_and_validate_script "https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh") || return 1
+        bash "$script" "" --unattended --keep-zshrc > /dev/null 2>&1
+        rm -f "$script"
     fi
 
     # Set zsh as the default shell for the current user

@@ -54,7 +54,7 @@ setup_logging() {
     local log_file="$log_dir/${log_name}.log"
 
     # Redirect stdout and stderr to both terminal and log file
-    exec > >(tee -a "$log_file") 2>&1
+    exec > >(tee "$log_file") 2>&1
     
     print_info "Logging to: $log_file"
 }
