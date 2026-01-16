@@ -6,6 +6,7 @@
 # Load core libraries in order
 LIBS=(
     "output.sh"
+    "env.sh"
     "security.sh"
     "utils.sh"
     "apt.sh"
@@ -15,6 +16,9 @@ LIBS=(
 for lib in "${LIBS[@]}"; do
     source "$(dirname "${BASH_SOURCE[0]}")/$lib"
 done
+
+# Setup XDG-compliant directories before any installations
+setup_xdg_dirs
 
 # Internal helper to verify if app is installed
 _verify_app_status() {
