@@ -9,9 +9,9 @@ source install/lib/module_runner.sh
 # Setup Logging
 setup_logging "test-bun-install"
 
-echo '==> [Container] Installing System Layer (includes ShellCheck)...'
+echo '==> [Container] Installing minimal essentials (curl, ca-certificates, shellcheck, unzip)...'
 quiet_apt_update
-install_category "system"
+sudo apt-get install -y curl ca-certificates shellcheck unzip > /dev/null 2>&1
 
 echo '==> [Container] Verifying ShellCheck is installed...'
 command -v shellcheck &> /dev/null || {
@@ -21,6 +21,7 @@ command -v shellcheck &> /dev/null || {
 echo "[OK] ShellCheck available: $(shellcheck --version | head -n 1)"
 
 echo '==> [Container] Testing Bun installer with ShellCheck validation...'
+source install/lib/module_runner.sh
 install_module "install/installers/dev-tools-12-bun.sh"
 
 echo '==> [Container] Verifying Bun installation...'
