@@ -10,7 +10,7 @@ APP_COMMAND="gemini"
 install_gemini() {
     # Install Gemini CLI via npm
     # This assumes Node.js and npm are already installed (handled by nodejs.sh).
-    npm install -g @google/gemini-cli --silent > /dev/null 2>&1
+    npm install -g @google/gemini-cli --silent
 
     # Ensure gemini command is available for extension installation
     if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
@@ -19,9 +19,9 @@ install_gemini() {
 
     # Install extensions
     print_info "Installing Gemini CLI extensions..."
-    gemini extensions install https://github.com/gemini-cli-extensions/conductor --silent > /dev/null 2>&1
-    gemini extensions install https://github.com/gemini-cli-extensions/nanobanana --silent > /dev/null 2>&1
-    gemini extensions install https://github.com/ChromeDevTools/chrome-devtools-mcp --silent > /dev/null 2>&1
+    gemini extensions install https://github.com/gemini-cli-extensions/conductor --consent > /dev/null
+    gemini extensions install https://github.com/gemini-cli-extensions/nanobanana --consent > /dev/null
+    gemini extensions install https://github.com/ChromeDevTools/chrome-devtools-mcp --consent > /dev/null
 }
 
 # Source shared installation helper
