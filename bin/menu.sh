@@ -23,8 +23,7 @@ show_menu() {
     echo "  2) CLI Development Tools"
     echo "  3) Desktop Components"
     echo "  4) GUI Applications"
-    echo "  5) Optional Software (Large/Heavy)"
-    echo "  A) Install ALL Categories (Excludes Optional)"
+    echo "  A) Install ALL Categories"
     echo "  Q) Quit"
     echo "--------------------------------------------------"
     read -p "Enter your choice: " choice
@@ -35,7 +34,6 @@ show_menu() {
         2) install_dev_tools ;;
         3) install_desktop ;;
         4) install_apps ;;
-        5) install_optional ;;
         [aA]) install_all ;;
         [qQ]) exit 0 ;;
         *) echo "Invalid choice, please try again." ;;

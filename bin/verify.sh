@@ -18,10 +18,7 @@ verify_all() {
     verify_category "dev-tools"
     verify_category "desktop"
     verify_category "apps"
-    
-    print_header "Optional Software"
-    verify_category "optional"
-    
+
     print_header "Verification Complete!"
 }
 

@@ -39,10 +39,6 @@ install_apps() {
     install_category "apps"
 }
 
-install_optional() {
-    install_category "optional"
-}
-
 install_all() {
     print_header "Starting Full Installation"
     quiet_apt_update
@@ -51,7 +47,6 @@ install_all() {
     install_category "desktop"
     install_category "apps"
     print_header "Full Installation Complete!"
-    print_info "Note: Optional packages (like TexLive) were NOT installed. Use --optional to install them."
 }
 
 # --- CLI Argument Parsing ---
@@ -69,7 +64,6 @@ show_help() {
     echo "  --desktop       Install desktop components"
     echo "  --dev-tools     Install CLI development tools"
     echo "  --apps          Install GUI applications"
-    echo "  --optional      Install optional/heavy software"
     echo "  --list <cat>    List apps in a category"
     echo "  -h, --help      Show this help message"
     echo ""
@@ -104,10 +98,6 @@ else
                 ;;
             --apps)
                 install_apps
-                shift
-                ;;
-            --optional)
-                install_optional
                 shift
                 ;;
             --list)
