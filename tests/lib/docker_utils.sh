@@ -45,7 +45,7 @@ set -e
 echo \"==> [INFO] Running as: \$(whoami) (ID: \$(id -u))\"
 cd \"\$CONTAINER_SRC\"
 echo \"==> [INFO] Testing...\"
-local script_path=\"\$CONTAINER_SRC/tests/container/${script_dir}/${script_name}.script.sh\"
+script_path=\"\$CONTAINER_SRC/tests/container/${script_dir}/${script_name}.script.sh\"
 if [ ! -f \"\$script_path\" ]; then
     echo \"ERROR: Test script not found: \$script_path\"
     exit 1
