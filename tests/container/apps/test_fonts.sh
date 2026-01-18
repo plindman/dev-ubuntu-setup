@@ -10,6 +10,6 @@ prepare_test_env
 # 4. Run Test
 echo "==> Starting Font test..."
 
-CMD_STRING=$(get_test_command "test-fonts")
+CMD_STRING=$(get_test_command "test_fonts")
 
 run_test_container "$CMD_STRING"

@@ -10,7 +10,7 @@ prepare_test_env
 # 4. Run Test
 echo "==> Starting Full test..."
 
-CMD_STRING=$(get_test_command "test-local-install")
+CMD_STRING=$(get_test_command "test_full_from_source")
 
 run_test_container "$CMD_STRING" "${CONTAINER_NAME}-local"
 

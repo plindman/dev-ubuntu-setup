@@ -19,32 +19,41 @@ ensure_test_image() {
         - < "$script_dir/Dockerfile"
 }
 
-# Helper to construct a docker command string from an internal test command
-# Usage: get_test_command "COMMAND_NAME" [KEY=VALUE ...]
-# Example: get_test_command "test-category" "CATEGORY=writing"
+# Helper to construct a docker command string to run a test script
+# Usage: get_test_command "SCRIPT_NAME"
+# Example: get_test_command "test_bun_install"
 get_test_command() {
-    local cmd_name="$1"
-    shift
-    
-    local cmd_path="$TESTS_COMMANDS_DIR/${cmd_name}.sh"
-    
-    if [ ! -f "$cmd_path" ]; then
-        echo "ERROR: Command not found at $cmd_path" >&2
+    local script_name="$1"
+
+    # Find the runner's location (runs on host)
+    local runner_path=$(find "$TESTS_ROOT/container" -name "${script_name}.sh" -type f | head -n 1)
+
+    if [ -z "$runner_path" ]; then
+        echo "ERROR: Runner not found: ${script_name}.sh"
         return 1
     fi
-    
-    local content=$(cat "$cmd_path")
-    
-    # Perform substitutions
-    for kv in "$@"; do
-        local key="${kv%%=*}"
-        local val="${kv#*=}"
-        # Replace {{KEY}} with VALUE
-        content="${content//\{\{$key\}\}/$val}"
-    done
-    
+
+    # Extract relative path from tests/container/
+    local relative_path=${runner_path#$TESTS_ROOT/container/}
+    local script_dir=$(dirname "$relative_path")
+
+    # Inline template for running test scripts
+    # Note: Use single quotes for variables that should expand in container,
+    #       escape dollar signs for variables that expand now
+    local template="#!/bin/bash
+set -e
+echo \"==> [INFO] Running as: \$(whoami) (ID: \$(id -u))\"
+cd \"\$CONTAINER_SRC\"
+echo \"==> [INFO] Testing...\"
+local script_path=\"\$CONTAINER_SRC/tests/container/${script_dir}/${script_name}.script.sh\"
+if [ ! -f \"\$script_path\" ]; then
+    echo \"ERROR: Test script not found: \$script_path\"
+    exit 1
+fi
+bash \"\$script_path\""
+
     echo "bash -s << 'EOF'
-$content
+$template
 EOF"
 }
 
@@ -83,4 +92,7 @@ run_test_container() {
         -v "$log_dir:$container_logs" \
         "$container_image" \
         bash -c "$command"
+
+    # Return the exit code from docker run
+    return $?
 }

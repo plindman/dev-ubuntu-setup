@@ -5,7 +5,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")"; while [ ! -f lib/config.sh ] && [
 prepare_test_env
 
 # Construct Command using Template
-CMD_STRING=$(get_test_command "test-opencode-install")
+CMD_STRING=$(get_test_command "test_opencode_install")
 
 # Run Test
 echo "==> Starting OpenCode Install Test..."

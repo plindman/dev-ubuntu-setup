@@ -5,7 +5,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")"; while [ ! -f lib/config.sh ] && [
 prepare_test_env
 
 # Construct Command using Template
-CMD_STRING=$(get_test_command "test-category" "CATEGORY=system")
+CMD_STRING=$(get_test_command "test_category_system")
 
 # Run Test
 echo "==> Starting Category Test: system..."

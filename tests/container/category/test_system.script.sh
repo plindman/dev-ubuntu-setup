@@ -1,10 +1,9 @@
 #!/bin/bash
-# Internal command: test-category (Template)
+# Test 'system' category installers
 
-CATEGORY="{{CATEGORY}}"
+CATEGORY="system"
 
 set -e
-# Navigate to the project root inside container
 cd "$CONTAINER_SRC"
 
 echo '==> [Container] Loading Library...'
