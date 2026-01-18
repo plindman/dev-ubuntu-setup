@@ -4,8 +4,10 @@
 set -e
 
 # Auto-discover project root relative to this script
+# NOTE: This script is co-located in tests/container/ (root), not in a subfolder
+# like apps/ or category/, so we only go up 2 levels instead of 3.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")"
+PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
 
 # Source the root install.sh to get all functions
 source "$PROJECT_ROOT/install.sh"
