@@ -9,4 +9,4 @@ CMD_STRING=$(get_test_command "test_bun_install")
 
 # Run Test
 echo "==> Starting Bun Install Test..."
-run_test_container "$CMD_STRING" "${CONTAINER_NAME}-bun"
+run_test_container "$CMD_STRING"

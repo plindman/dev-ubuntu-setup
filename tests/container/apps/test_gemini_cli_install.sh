@@ -9,4 +9,4 @@ CMD_STRING=$(get_test_command "test_gemini_cli_install")
 
 # Run Test
 echo "==> Starting Gemini CLI Install Test..."
-run_test_container "$CMD_STRING" "${CONTAINER_NAME}-gemini-cli"
+run_test_container "$CMD_STRING"

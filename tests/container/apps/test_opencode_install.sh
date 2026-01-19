@@ -9,4 +9,4 @@ CMD_STRING=$(get_test_command "test_opencode_install")
 
 # Run Test
 echo "==> Starting OpenCode Install Test..."
-run_test_container "$CMD_STRING" "${CONTAINER_NAME}-opencode"
+run_test_container "$CMD_STRING"
