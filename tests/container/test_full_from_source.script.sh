@@ -12,6 +12,9 @@ PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
 # Source the root install.sh to get all functions
 source "$PROJECT_ROOT/install.sh"
 
+# Setup Logging
+setup_logging "test-full-from-source"
+
 copy_local_repository() {
     print_step "Copying local repository to $TARGET_DIR..."
     # We copy the content of PROJECT_ROOT (the mounted repo) to TARGET_DIR (the temp dir)

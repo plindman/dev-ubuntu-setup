@@ -7,6 +7,9 @@ cd "$CONTAINER_SRC"
 # Source the library (loads output, utils, apt, fonts)
 source install/lib/module_runner.sh
 
+# Setup Logging
+setup_logging "test-fonts"
+
 # Ensure dependencies (core + networking) via proper modules
 quiet_apt_update
 source install/installers/system-01-core.sh
