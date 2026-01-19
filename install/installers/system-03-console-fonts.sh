@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to install Nerd Fonts (FiraCode and JetBrainsMono).
-# Pre-requisites: system-01-core.sh (for unzip, fontconfig).
+# Pre-requisites: system-00-core.sh (for unzip, fontconfig).
 # This corresponds to the "System" -> "Fonts" category.
 
 APP_NAME="Nerd Fonts (FiraCode, JetBrainsMono)"

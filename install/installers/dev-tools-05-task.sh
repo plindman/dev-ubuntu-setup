@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to install Task (Taskfile).
-# Pre-requisites: system-02-networking-tools.sh (for curl).
+# Pre-requisites: system-01-networking.sh (for curl).
 # https://taskfile.dev/docs/installation
 
 APP_NAME="Task"

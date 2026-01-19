@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to install Professional Writing Fonts.
-# Pre-requisites: system-01-core.sh (for unzip, fontconfig).
+# Pre-requisites: system-00-core.sh (for unzip, fontconfig).
 # This corresponds to the "System" -> "Writing Fonts" category.
 
 APP_NAME="Writing Fonts (Inter, IBM Plex, Garamond, etc.)"

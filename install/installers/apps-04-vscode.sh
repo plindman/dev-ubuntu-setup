@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to install Visual Studio Code.
-# Pre-requisites: system-01-core.sh (for gpg), system-02-networking-tools.sh (for wget), add_apt_repo helper.
+# Pre-requisites: system-00-core.sh (for gpg), system-01-networking.sh (for wget), add_apt_repo helper.
 # This corresponds to the "Applications (GUI)" -> "Development" category in SOFTWARE_INDEX.md.
 # https://code.visualstudio.com/docs/setup/linux
 # https://itsfoss.gitlab.io/post/how-to-install-vscode-on-ubuntu-2404-2204-or-2004/

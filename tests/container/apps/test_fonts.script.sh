@@ -12,9 +12,9 @@ setup_logging "test-fonts"
 
 # Ensure dependencies (core + networking) via proper modules
 quiet_apt_update
-source install/installers/system-01-core.sh
+source install/installers/system-00-core.sh
 install_core
-source install/installers/system-02-networking-tools.sh
+source install/installers/system-01-networking.sh
 install_networking_tools
 
 echo ''

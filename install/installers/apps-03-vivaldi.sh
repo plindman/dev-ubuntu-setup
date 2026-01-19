@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to install Vivaldi Browser.
-# Pre-requisites: system-01-core.sh (for gpg), system-02-networking-tools.sh (for curl), add_apt_repo helper.
+# Pre-requisites: system-00-core.sh (for gpg), system-01-networking.sh (for curl), add_apt_repo helper.
 # This corresponds to the "Applications (GUI)" -> "Web Browsers" category in SOFTWARE_INDEX.md.
 
 APP_NAME="Vivaldi"
