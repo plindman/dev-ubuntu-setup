@@ -59,6 +59,23 @@ BENIGN_CODES=(
 #   MITIGATION: We only install from trusted HTTPS sources (official repos),
 #   reducing the risk of malicious scripts exploiting unquoted variables.
 
+# Download a file from URL to a temp location
+# Usage: file_path=$(download_file <url>)
+# Returns: Path to downloaded file on stdout, returns 1 on error
+download_file() {
+    local url="$1"
+    local temp_file="/tmp/download_$(date +%s)_$$"
+
+    # Download the file
+    if ! curl -fsSL "$url" -o "$temp_file"; then
+        echo "[ERROR] Failed to download file from $url" >&2
+        return 1
+    fi
+
+    # Output the path for caller to capture
+    echo "$temp_file"
+}
+
 # Download and validate a script from URL using ShellCheck
 # Usage: script_path=$(download_and_validate_script <url>)
 # Returns: Path to downloaded script on stdout, exits on error
@@ -68,13 +85,7 @@ BENIGN_CODES=(
 #   - Warns but continues on all other codes
 download_and_validate_script() {
     local url="$1"
-    local temp_script="/tmp/install_$(date +%s)_$.sh"
-
-    # Download the script
-    if ! curl -fsSL "$url" -o "$temp_script"; then
-        echo "[ERROR] Failed to download script from $url" >&2
-        return 1
-    fi
+    local temp_script=$(download_file "$url") || return 1
 
     # Validate with ShellCheck if available
     if command -v shellcheck &> /dev/null; then
