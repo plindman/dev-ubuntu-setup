@@ -8,7 +8,7 @@ This document describes the coding standards and practices used in this reposito
 
 The installation system is divided into **Modules** (data) and the **Framework** (logic).
 
-### Installer Modules (`install/installers/`)
+### Installer Modules (`installers/`)
 
 Installer scripts are pure configuration modules. They must **not** source any helpers or execute any commands when sourced.
 
@@ -31,7 +31,7 @@ Files must follow the pattern: `<category>-<index>-<name>.sh`
 Example: `dev-tools-01-git.sh`, `system-05-tmux.sh`
 The `index` (01, 02...) determines the execution order within the category.
 
-### The Framework (`install/lib/module_runner.sh`)
+### The Framework (`lib/module_runner.sh`)
 
 The framework is responsible for:
 1.  **Discovery**: Finding modules by category prefix via `_get_modules_for_category`.

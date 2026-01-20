@@ -4,7 +4,7 @@
 set -e
 
 echo '==> [Container] Loading Library...'
-source install/lib/module_runner.sh
+source lib/module_runner.sh
 
 # Setup Logging
 setup_logging "test-bun-install"
@@ -21,8 +21,8 @@ command -v shellcheck &> /dev/null || {
 echo "[OK] ShellCheck available: $(shellcheck --version | head -n 1)"
 
 echo '==> [Container] Testing Bun installer with ShellCheck validation...'
-source install/lib/module_runner.sh
-install_module "install/installers/dev-tools-12-bun.sh"
+source lib/module_runner.sh
+install_module "installers/dev-tools-12-bun.sh"
 
 echo '==> [Container] Verifying Bun installation...'
 if command -v bun &> /dev/null; then

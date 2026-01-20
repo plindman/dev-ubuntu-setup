@@ -4,7 +4,7 @@
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")"; while [ ! -f lib/config.sh ] && [ "$PWD" != "/" ]; do cd ..; done; pwd)/lib/config.sh"
 
 # Source the installer to get ZSH_PLUGINS and POWERLEVEL10K_URL
-source "$PROJECT_ROOT/install/installers/system-04-zsh.sh"
+source "$PROJECT_ROOT/installers/system-04-zsh.sh"
 
 echo "=== Verifying Zsh Plugin URLs ==="
 

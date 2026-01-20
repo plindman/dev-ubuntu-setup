@@ -4,7 +4,7 @@
 set -e
 
 echo '==> [Container] Loading Library...'
-source install/lib/module_runner.sh
+source lib/module_runner.sh
 
 # Setup Logging
 setup_logging "test-opencode-install"
@@ -21,7 +21,7 @@ command -v shellcheck &> /dev/null || {
 echo "[OK] ShellCheck available: $(shellcheck --version | head -n 1)"
 
 echo '==> [Container] Testing OpenCode installer with ShellCheck validation...'
-install_module "install/installers/dev-tools-23-opencode.sh"
+install_module "installers/dev-tools-23-opencode.sh"
 
 echo '==> [Container] Verifying OpenCode installation...'
 if command -v opencode &> /dev/null; then

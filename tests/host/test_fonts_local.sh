@@ -7,7 +7,7 @@ set -e
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")"; while [ ! -f lib/config.sh ] && [ "$PWD" != "/" ]; do cd ..; done; pwd)/lib/config.sh"
 
 # Load library
-source "$PROJECT_ROOT/install/lib/module_runner.sh"
+source "$PROJECT_ROOT/lib/module_runner.sh"
 
 
 

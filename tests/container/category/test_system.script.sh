@@ -7,7 +7,7 @@ set -e
 cd "$CONTAINER_SRC"
 
 echo '==> [Container] Loading Library...'
-source install/lib/module_runner.sh
+source lib/module_runner.sh
 
 # Setup Logging
 setup_logging "test-category-$CATEGORY"

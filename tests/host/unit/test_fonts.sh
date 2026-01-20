@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Unit test for install/lib/fonts.sh logic
+# Unit test for lib/fonts.sh logic
 # Tests version parsing and formatting without external dependencies.
 
 # 1. Mock the dependencies
@@ -9,9 +9,9 @@ GREEN=""
 
 # 2. Source the library under test
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")"; while [ ! -f lib/config.sh ] && [ "$PWD" != "/" ]; do cd ..; done; pwd)/lib/config.sh"
-source "$PROJECT_ROOT/install/lib/output.sh"
-source "$PROJECT_ROOT/install/lib/apt.sh"
-source "$PROJECT_ROOT/install/lib/fonts.sh"
+source "$PROJECT_ROOT/lib/output.sh"
+source "$PROJECT_ROOT/lib/apt.sh"
+source "$PROJECT_ROOT/lib/fonts.sh"
 
 # Mock dpkg-query
 dpkg-query() {

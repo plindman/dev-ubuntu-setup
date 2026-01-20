@@ -4,7 +4,7 @@
 set -e
 
 echo '==> [Container] Loading Library...'
-source install/lib/module_runner.sh
+source lib/module_runner.sh
 
 # Setup Logging
 setup_logging "test-gemini-cli-install"
@@ -14,13 +14,13 @@ quiet_apt_update
 sudo apt-get install -y curl ca-certificates > /dev/null 2>&1
 
 echo '==> [Container] Installing mise (required for Node.js)...'
-install_module "install/installers/dev-tools-02-mise.sh"
+install_module "installers/dev-tools-02-mise.sh"
 
 echo '==> [Container] Installing Node.js (required for gemini-cli)...'
-install_module "install/installers/dev-tools-10-nodejs.sh"
+install_module "installers/dev-tools-10-nodejs.sh"
 
 echo '==> [Container] Testing Gemini CLI installer with extensions...'
-install_module "install/installers/dev-tools-21-gemini-cli.sh"
+install_module "installers/dev-tools-21-gemini-cli.sh"
 
 echo '==> [Container] Verifying Gemini CLI installation...'
 if command -v gemini &> /dev/null; then
