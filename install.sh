@@ -13,7 +13,8 @@ mkdir -p "$TARGET_DIR"
 # Logging setup
 LOG_DIR="$HOME/.local/state/dev-ubuntu-setup"
 mkdir -p "$LOG_DIR"
-LOG_FILE="$LOG_DIR/install.log"
+LOG_FILE="${LOG_FILE_NAME:-install}.log"
+LOG_FILE="$LOG_DIR/$LOG_FILE"
 
 exec > >(tee "$LOG_FILE") 2>&1
 
