@@ -3,33 +3,23 @@
 
 set -e
 
-# Auto-discover project root relative to this script
-# NOTE: This script is co-located in tests/container/ (root), not in a subfolder
-# like apps/ or category/, so we only go up 2 levels instead of 3.
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
+# Set custom log filename for this test
+export LOG_FILE_NAME="test-full-from-source"
 
 # Source the root install.sh to get all functions
-source "$PROJECT_ROOT/install.sh"
+# Note: CONTAINER_SRC is set by the container environment
+source "$CONTAINER_SRC/install.sh"
 
-# Setup Logging
-setup_logging "test-full-from-source"
-
-copy_local_repository() {
+# Override clone_repository to copy local instead of git clone
+clone_repository() {
     print_step "Copying local repository to $TARGET_DIR..."
-    # We copy the content of PROJECT_ROOT (the mounted repo) to TARGET_DIR (the temp dir)
+    # We copy the content of CONTAINER_SRC (the mounted repo) to TARGET_DIR (the temp dir)
     # We use -a to preserve permissions/mode
-    cp -a "$PROJECT_ROOT/." "$TARGET_DIR/"
+    cp -a "$CONTAINER_SRC/." "$TARGET_DIR/"
     cd "$TARGET_DIR"
 }
 
-# Override run function to use copy instead of clone
-run() {
-    prepare_environment
-    copy_local_repository  # <-- Only difference
-    execute_installation "$@"
-    verify_installation
-}
-
-# Execute
-run "$@"
+# Execute if not sourced
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    run "$@"
+fi
