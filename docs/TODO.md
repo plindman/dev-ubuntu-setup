@@ -4,6 +4,9 @@ This file tracks improvements and issues to address in future iterations.
 
 ---
 
+## neovim PPA
+Neovim installer to add apt ppa:neovim-ppa/stable so that we get newer version than ubuntu frozen.
+
 ## Chezmoi & Dotfiles Integration
 
 chezmoi is now installed early (system-02-chezmoi.sh), but needs integration planning:
