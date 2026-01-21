@@ -1,20 +1,29 @@
 #!/bin/bash
 APP_NAME="Core System Utilities"
-# APP_COMMAND not relevant given we have the verify fucntions. it is either or.
+# APP_COMMAND not relevant given we have the verify functions. it is either or.
 # APP_COMMAND=("unzip" "gpg" "lsb_release" "shellcheck")
 
 # Convenience list for verification
 CORE_PACKAGES=(
-    "apt-transport-https"
-    "ca-certificates"
-    "gnupg"
-    "lsb-release"
-    "unzip"
-    "software-properties-common"
-    "fontconfig"
-    "apt-utils"
-    "age"
-    "shellcheck"
+    # Repository & package management essentials
+    "apt-transport-https"    # Required for apt to access HTTPS repositories (third-party repos)
+    "ca-certificates"         # SSL/TLS certificates for secure connections (curl, wget)
+    "gnupg"                   # GPG for verifying apt repository signatures
+    "software-properties-common"  # Provides add-apt-repository command
+    "apt-utils"               # Improves apt output (prevents debconf warnings)
+
+    # Archive & file utilities
+    "unzip"                   # Required to extract downloaded zip files (fonts, etc.)
+
+    # System information
+    "lsb-release"             # Provides OS version info (used by external install scripts)
+
+    # Font management (needed early by system-03-console-fonts.sh)
+    "fontconfig"              # Font configuration and caching
+
+    # Security utilities
+    "age"                     # File encryption (used by chezmoi for dotfiles)
+    "shellcheck"              # Shell script linting (validates downloaded install scripts)
 )
 
 install_core() {
