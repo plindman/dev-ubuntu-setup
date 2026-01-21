@@ -12,7 +12,7 @@ install_chezmoi() {
     # We use -b to specify the binary directory
     local script
     script=$(download_and_validate_script "https://get.chezmoi.io") || return 1
-    sh "$script" -- -b "$HOME/.local/bin" > /dev/null 2>&1
+    sh "$script" -b "$HOME/.local/bin"
     rm -f "$script"
 
     # Ensure ~/.local/bin is in PATH for the current session if it isn't already
