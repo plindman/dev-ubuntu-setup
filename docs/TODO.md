@@ -31,12 +31,5 @@ Current test coverage is minimal. Consider adding tests for:
 
 ---
 
-## Documentation: Download Utilities
-
-Document the `download_file()` and `download_and_validate_script()` security pattern in CODING_STANDARDS.md to guide future installer scripts.
-
 ---
-
----
-
 
