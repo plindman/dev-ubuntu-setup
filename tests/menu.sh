@@ -11,15 +11,18 @@ fi
 
 while true; do
     # 1. Select Category (first item is the default in fzf)
-    CHOICE=$(printf "Run Full Test\nContainer (Apps)\nContainer (Category)\nHost Tests" | fzf --layout=reverse --prompt="Select Action > " --height=10 --border)
+    CHOICE=$(printf "Run Full Test\nRun Dry-run Test\nContainer (Apps)\nContainer (Category)\nHost Tests" | fzf --layout=reverse --prompt="Select Action > " --height=10 --border)
 
     # Exit if user cancels at category level
     [ -z "$CHOICE" ] && exit 0
 
     # 2. Handle selection
     case "$CHOICE" in
-        "Run Full Test")
-            TEST="tests/container/test_full_from_source.sh"
+        "Run Full Install Test")
+            TEST="tests/container/test_full_install_from_local_source.sh"
+            ;;
+        "Run Dry-run Test")
+            TEST="tests/container/test_dry_run_from_local_source.sh"
             ;;
         "Container (Apps)")
             TEST=$( { printf "← Back\n"; find tests/container/apps -name "*.sh" | awk -F'/' '{print $NF "\t" $0}'; } | fzf --layout=reverse --prompt="Select App Test > " --delimiter=$'\t' --with-nth=1 | cut -f2-)

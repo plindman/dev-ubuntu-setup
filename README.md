@@ -34,6 +34,20 @@ For a more granular, interactive experience where you can pick specific categori
 ./bin/menu.sh
 ```
 
+## Preview Installation (Dry-run)
+
+See what will be installed without actually installing anything:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/plindman/dev-ubuntu-setup/main/install.sh | bash -s -- --dry-run
+```
+
+This will:
+- Clone the repository
+- Show what packages/tools are missing and would be installed
+- Skip the actual installation step
+- Run verification to show the current state
+
 ## Repository Structure
 
 The repository is organized into several key parts:

@@ -73,9 +73,24 @@ verify_installation() {
 
 # Main run function
 run() {
+    # Check for --dry-run flag
+    DRY_RUN=false
+    for arg in "$@"; do
+        if [[ "$arg" == "--dry-run" ]]; then
+            DRY_RUN=true
+            break
+        fi
+    done
+
     prepare_environment
     clone_repository
-    execute_installation "$@"
+
+    # Only execute installation if not in dry-run mode
+    if [[ "$DRY_RUN" != "true" ]]; then
+        execute_installation "$@"
+    fi
+
+    # Always verify installation
     verify_installation
 }
 

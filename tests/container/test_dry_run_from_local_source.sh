@@ -1,5 +1,5 @@
 #!/bin/bash
-# Test the full "New Machine"  using the local project.
+# Test dry-run mode using local source
 
 set -e
 
@@ -7,11 +7,11 @@ set -e
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")"; while [ ! -f lib/config.sh ] && [ "$PWD" != "/" ]; do cd ..; done; pwd)/lib/config.sh"
 prepare_test_env
 
-# 4. Run Test
-echo "==> Starting Full test..."
+# Run Test
+echo "==> Starting Dry-run test..."
 
-CMD_STRING=$(get_test_command "test_full_from_source")
+CMD_STRING=$(get_test_command "test_dry_run_from_local_source")
 
 run_test_container "$CMD_STRING"
 
-echo "==> [INFO] Full test completed. Check logs in tests/logs/ for details."
+echo "==> [INFO] Dry-run test completed. Check logs in tests/logs/ for details."

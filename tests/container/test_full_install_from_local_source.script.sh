@@ -1,10 +1,10 @@
 #!/bin/bash
-# dev-install.sh - Test version that sources root install.sh
+# test_full_install_from_local_source.script.sh - Test version that sources root install.sh
 
 set -e
 
 # Set custom log filename for this test
-export LOG_FILE_NAME="test-full-from-source"
+export LOG_FILE_NAME="test-full-install"
 
 # Source the root install.sh to get all functions
 # Note: CONTAINER_SRC is set by the container environment
