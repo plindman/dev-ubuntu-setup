@@ -5,6 +5,7 @@
 # Verify if a list of font families are installed and registered in the system.
 # Usage: fonts_installed "FiraCode" "JetBrainsMono"
 fonts_installed() {
+    command_exists fc-list || return 1
     for font in "$@"; do
         if ! fc-list : family | grep -qi "$font"; then
             return 1
@@ -16,6 +17,7 @@ fonts_installed() {
 # Print missing fonts from a provided list.
 # Usage: print_missing_fonts "FiraCode" "JetBrainsMono"
 print_missing_fonts() {
+    command_exists fc-list || { print_color "$YELLOW" "   Missing: $*"; return; }
     local missing=()
     for font in "$@"; do
         if ! fc-list : family | grep -qi "$font"; then
