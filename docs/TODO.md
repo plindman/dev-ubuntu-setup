@@ -37,17 +37,6 @@ Document the `download_file()` and `download_and_validate_script()` security pat
 
 ---
 
-## Verify/Dry-Run Mode
-
-Develop a `--dry-run` or `--verify` mode for the installer that:
-
-- Shows what would be installed without actually installing
-- Checks prerequisites and reports missing dependencies
-- Validates installer scripts before execution
-- Can be used to preview installation changes
-
-This would help users catch issues early and understand what the installer will do.
-
 ---
 
 

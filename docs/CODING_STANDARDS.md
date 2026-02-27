@@ -83,6 +83,28 @@ quiet_apt_install pkg1 pkg2
 
 Use verbatim commands from official documentation when specific repositories or complex installation steps are required. Always add a comment explaining it's a verbatim copy.
 
+### Downloaded Scripts Security Pattern
+
+For installers that download and execute scripts (e.g., from GitHub), use the `download_and_validate_script()` helper from `lib/security.sh`:
+
+**Why:** Downloading scripts from the internet requires security validation to prevent malicious code execution.
+
+**Pattern:**
+```bash
+local script
+script=$(download_and_validate_script "https://example.com/install.sh") || return 1
+bash "$script" > /dev/null 2>&1
+rm -f "$script"
+```
+
+**What it does:**
+- Downloads to a temporary file
+- Validates the script with ShellCheck (warns on security-critical issues, aborts on critical failures)
+- Returns the temp file path for execution
+- Cleans up the temp file after use
+
+**Examples:** mise, bun, uv, zoxide, chezmoi, ghostty, zed all use this pattern.
+
 ---
 
 ## Verification Pattern

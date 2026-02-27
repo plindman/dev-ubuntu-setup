@@ -24,8 +24,14 @@ The easiest way to discover and run tests is via the interactive menu:
 ### Manual Execution
 #### Docker Integration Tests
 
+**Full Installation Test:**
 ```bash
-./tests/container/test_full.sh
+./tests/container/test_full_install_from_local_source.sh
+```
+
+**Dry-run Test:**
+```bash
+./tests/container/test_dry_run_from_local_source.sh
 ```
 
 #### Category Tests
