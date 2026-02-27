@@ -23,6 +23,7 @@ These are core operating system utilities and essential command-line tools that 
 ### Shell
 *   **zsh**: An extended Bourne shell with powerful features and improvements for an enhanced command-line experience.
 *   **Oh My Zsh**: A framework for easily managing Zsh configuration, themes, and plugins. (Note: Many themes require a Nerd Font like Font Awesome to be installed in the desktop environment for icons to render correctly).
+*   **zoxide**: A smarter cd command that learns your habits and provides fast directory jumping. A modern replacement for the 'z' plugin.
 *   **tmux**: A terminal multiplexer for managing multiple terminal sessions.
 *   **Oh My Tmux**: A configuration framework for `tmux`.
 *   **chezmoi**: A multi-platform dotfile manager that allows you to manage your personal configuration files across multiple machines.
